@@ -15,7 +15,6 @@ export function FlagRays({ className = "" }: { className?: string }) {
       {Array.from({ length: rays }).map((_, i) => {
         const isRed = i % 2 === 0;
         const angle = -90 + (i * 180) / (rays - 1);
-        const rad = (angle * Math.PI) / 180;
         const cx = 400;
         const cy = 400;
         const r = 900;
