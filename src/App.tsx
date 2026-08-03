@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Hub } from "./components/Hub";
 import { BlockView } from "./components/BlockView";
+import { AudioToggle } from "./components/AudioToggle";
 import { blocks } from "./data/blocks";
 import "./App.css";
 
@@ -37,6 +38,7 @@ function App() {
           </motion.div>
         )}
       </AnimatePresence>
+      <AudioToggle />
     </div>
   );
 }
