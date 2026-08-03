@@ -169,28 +169,34 @@ export function CortenSign({
       </svg>
 
       {/* Stamped overlay: icon top-left, subtitle + count bottom-center */}
-      <div className="absolute inset-0 flex flex-col justify-between p-4 pointer-events-none">
-        <div>
+      <div className="absolute inset-0 flex flex-col justify-between p-5 pointer-events-none">
+        <div className="flex items-start">
           {icon && (
             <div
-              className="h-12 w-12 text-[#1D0A02]"
+              className="h-11 w-11 text-[#1A0803]"
               style={{
                 filter:
-                  "drop-shadow(0 1.5px 0 rgba(255,200,140,0.5)) drop-shadow(0 -1px 0 rgba(0,0,0,0.6))",
+                  "drop-shadow(0 1.5px 0 rgba(255,220,180,0.55)) drop-shadow(0 -1px 0 rgba(0,0,0,0.55))",
               }}
             >
               {icon}
             </div>
           )}
         </div>
-        <div className="text-center pb-1">
+        <div className="text-center">
           {subtitle && (
-            <div className="font-stamp text-[11px] uppercase tracking-[0.16em] text-[#2A0F04]/85 leading-tight">
+            <div
+              className="font-stamp text-[12px] uppercase tracking-[0.18em] text-[#FFE9C7] leading-tight"
+              style={{ textShadow: "0 1px 2px rgba(0,0,0,0.75)" }}
+            >
               {subtitle}
             </div>
           )}
           {footer && (
-            <div className="mt-1 font-stamp text-[9px] uppercase tracking-[0.32em] text-[#3A1B0C]/70">
+            <div
+              className="mt-2 font-stamp text-[10px] uppercase tracking-[0.36em] text-[#FFCB8A]"
+              style={{ textShadow: "0 1px 2px rgba(0,0,0,0.7)" }}
+            >
               {footer}
             </div>
           )}

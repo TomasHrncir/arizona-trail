@@ -1,5 +1,13 @@
 import type { Slide as SlideType } from "../data/blocks";
 
+/**
+ * Presentation slide.
+ * Design goals:
+ *  - Big, high-contrast white text (readable during projection)
+ *  - Generous padding, single measure column for text (~65ch)
+ *  - Rye for display, Fraunces for body
+ *  - Consistent max-width, centered
+ */
 export function Slide({ slide }: { slide: SlideType }) {
   switch (slide.layout) {
     case "title":
@@ -21,69 +29,106 @@ export function Slide({ slide }: { slide: SlideType }) {
   }
 }
 
+/* ----------------------------- shared shell ----------------------------- */
+
+function Stage({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={`h-full w-full flex items-center justify-center px-16 md:px-24 py-10 ${className}`}>
+      <div className="w-full max-w-5xl">{children}</div>
+    </div>
+  );
+}
+
+/* ------------------------------- variants ------------------------------ */
+
 function TitleSlide({ slide }: { slide: SlideType }) {
   return (
-    <div className="h-full flex flex-col items-center justify-center text-center px-12">
-      <h1 className="font-display text-white text-7xl md:text-8xl leading-none drop-shadow-[0_6px_0_rgba(0,0,0,0.3)]">
-        {slide.title}
-      </h1>
-      {slide.subtitle && (
-        <p className="mt-6 text-2xl italic text-az-sand max-w-3xl">
-          {slide.subtitle}
-        </p>
-      )}
-      <div className="mt-10 h-1 w-32 rounded bg-az-gold" />
-    </div>
+    <Stage className="text-center">
+      <div className="flex flex-col items-center">
+        <h1
+          className="font-display text-white text-6xl md:text-8xl leading-[0.95] tracking-wide uppercase"
+          style={{ textShadow: "0 4px 0 rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.55)" }}
+        >
+          {slide.title}
+        </h1>
+        {slide.subtitle && (
+          <p className="mt-8 font-body text-2xl md:text-3xl italic text-az-sand max-w-3xl leading-snug">
+            {slide.subtitle}
+          </p>
+        )}
+        <div className="mt-10 h-1 w-32 rounded bg-az-gold" />
+      </div>
+    </Stage>
   );
 }
 
 function TextSlide({ slide }: { slide: SlideType }) {
   return (
-    <div className="h-full flex flex-col justify-center px-16 max-w-5xl mx-auto">
-      {slide.title && (
-        <h2 className="font-display text-white text-5xl md:text-6xl mb-6">
-          {slide.title}
-        </h2>
-      )}
-      {slide.body && (
-        <p className="text-2xl leading-relaxed text-az-sand max-w-3xl">
-          {slide.body}
-        </p>
-      )}
-    </div>
+    <Stage>
+      <div>
+        {slide.title && (
+          <h2
+            className="font-display text-white text-5xl md:text-6xl leading-tight uppercase"
+            style={{ textShadow: "0 3px 0 rgba(0,0,0,0.35), 0 6px 20px rgba(0,0,0,0.5)" }}
+          >
+            {slide.title}
+          </h2>
+        )}
+        {slide.body && (
+          <p className="mt-8 font-body text-white text-2xl md:text-3xl leading-relaxed max-w-4xl">
+            {slide.body}
+          </p>
+        )}
+      </div>
+    </Stage>
   );
 }
 
 function TextImageSlide({ slide }: { slide: SlideType }) {
   return (
-    <div className="h-full grid grid-cols-2 gap-10 items-center px-16">
-      <div>
-        {slide.title && (
-          <h2 className="font-display text-white text-5xl mb-4">{slide.title}</h2>
-        )}
-        {slide.body && (
-          <p className="text-xl leading-relaxed text-az-sand">{slide.body}</p>
-        )}
+    <Stage>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          {slide.title && (
+            <h2
+              className="font-display text-white text-4xl md:text-5xl leading-tight uppercase"
+              style={{ textShadow: "0 3px 0 rgba(0,0,0,0.35)" }}
+            >
+              {slide.title}
+            </h2>
+          )}
+          {slide.body && (
+            <p className="mt-6 font-body text-white text-xl md:text-2xl leading-relaxed">
+              {slide.body}
+            </p>
+          )}
+        </div>
+        <div className="rounded-3xl overflow-hidden ring-1 ring-white/20 shadow-2xl aspect-[4/3] bg-black/30">
+          {slide.image ? (
+            <img
+              src={slide.image}
+              alt={slide.imageAlt ?? ""}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <Placeholder label="obrázek" />
+          )}
+        </div>
       </div>
-      <div className="rounded-3xl overflow-hidden ring-1 ring-white/20 shadow-2xl aspect-[4/3] bg-black/20">
-        {slide.image ? (
-          <img
-            src={slide.image}
-            alt={slide.imageAlt ?? ""}
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <Placeholder label="obrázek" />
-        )}
-      </div>
-    </div>
+    </Stage>
   );
 }
 
 function ImageSlide({ slide }: { slide: SlideType }) {
   return (
-    <div className="h-full flex flex-col p-10">
-      <div className="flex-1 rounded-3xl overflow-hidden ring-1 ring-white/20 shadow-2xl bg-black/20">
+    <div className="h-full flex flex-col p-12">
+      <div className="flex-1 rounded-3xl overflow-hidden ring-1 ring-white/20 shadow-2xl bg-black/30">
         {slide.image ? (
           <img
             src={slide.image}
@@ -95,12 +140,16 @@ function ImageSlide({ slide }: { slide: SlideType }) {
         )}
       </div>
       {(slide.title || slide.caption) && (
-        <div className="text-center mt-4">
+        <div className="text-center mt-6">
           {slide.title && (
-            <div className="font-display text-white text-3xl">{slide.title}</div>
+            <div className="font-display text-white text-3xl uppercase">
+              {slide.title}
+            </div>
           )}
           {slide.caption && (
-            <div className="text-az-sand italic mt-1">{slide.caption}</div>
+            <div className="font-body text-az-sand italic text-lg mt-2">
+              {slide.caption}
+            </div>
           )}
         </div>
       )}
@@ -110,7 +159,7 @@ function ImageSlide({ slide }: { slide: SlideType }) {
 
 function VideoSlide({ slide }: { slide: SlideType }) {
   return (
-    <div className="h-full flex flex-col p-10">
+    <div className="h-full flex flex-col p-12">
       <div className="flex-1 rounded-3xl overflow-hidden ring-1 ring-white/20 shadow-2xl bg-black">
         {slide.video ? (
           <video
@@ -123,12 +172,16 @@ function VideoSlide({ slide }: { slide: SlideType }) {
         )}
       </div>
       {(slide.title || slide.caption) && (
-        <div className="text-center mt-4">
+        <div className="text-center mt-6">
           {slide.title && (
-            <div className="font-display text-white text-3xl">{slide.title}</div>
+            <div className="font-display text-white text-3xl uppercase">
+              {slide.title}
+            </div>
           )}
           {slide.caption && (
-            <div className="text-az-sand italic mt-1">{slide.caption}</div>
+            <div className="font-body text-az-sand italic text-lg mt-2">
+              {slide.caption}
+            </div>
           )}
         </div>
       )}
@@ -138,46 +191,57 @@ function VideoSlide({ slide }: { slide: SlideType }) {
 
 function QuoteSlide({ slide }: { slide: SlideType }) {
   return (
-    <div className="h-full flex flex-col justify-center items-center text-center px-16">
-      <div className="text-9xl leading-none text-az-gold/60 font-display">"</div>
-      <blockquote className="font-body italic text-white text-4xl max-w-4xl -mt-6">
-        {slide.quote}
-      </blockquote>
-      {slide.quoteBy && (
-        <div className="mt-6 text-az-sand text-xl">— {slide.quoteBy}</div>
-      )}
-    </div>
+    <Stage className="text-center">
+      <div className="flex flex-col items-center">
+        <div className="font-display text-[8rem] leading-none text-az-gold/60">"</div>
+        <blockquote className="font-body italic text-white text-3xl md:text-4xl max-w-4xl leading-snug -mt-6">
+          {slide.quote}
+        </blockquote>
+        {slide.quoteBy && (
+          <div className="mt-8 font-stamp uppercase tracking-widest text-az-sand text-base">
+            — {slide.quoteBy}
+          </div>
+        )}
+      </div>
+    </Stage>
   );
 }
 
 function StatsSlide({ slide }: { slide: SlideType }) {
   return (
-    <div className="h-full flex flex-col justify-center items-center px-16">
-      {slide.title && (
-        <h2 className="font-display text-white text-5xl mb-10 text-center">
-          {slide.title}
-        </h2>
-      )}
-      <div className="grid grid-cols-3 gap-8 max-w-5xl w-full">
-        {slide.stats?.map((s, i) => (
-          <div
-            key={i}
-            className="rounded-3xl bg-white/10 backdrop-blur px-6 py-8 text-center ring-1 ring-white/20"
+    <Stage className="text-center">
+      <div>
+        {slide.title && (
+          <h2
+            className="font-display text-white text-5xl md:text-6xl mb-12 uppercase"
+            style={{ textShadow: "0 3px 0 rgba(0,0,0,0.35)" }}
           >
-            <div className="font-display text-az-gold text-4xl md:text-5xl leading-tight">
-              {s.value}
+            {slide.title}
+          </h2>
+        )}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          {slide.stats?.map((s, i) => (
+            <div
+              key={i}
+              className="rounded-3xl bg-white/10 backdrop-blur px-6 py-10 text-center ring-1 ring-white/20"
+            >
+              <div className="font-display text-az-gold text-4xl md:text-5xl leading-tight">
+                {s.value}
+              </div>
+              <div className="mt-3 font-body text-white/90 italic text-lg">
+                {s.label}
+              </div>
             </div>
-            <div className="mt-2 text-az-sand italic">{s.label}</div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </Stage>
   );
 }
 
 function Placeholder({ label }: { label: string }) {
   return (
-    <div className="w-full h-full flex items-center justify-center text-white/50 italic">
+    <div className="w-full h-full flex items-center justify-center text-white/50 italic font-body">
       [ {label} — přidej do slide.image / slide.video ]
     </div>
   );

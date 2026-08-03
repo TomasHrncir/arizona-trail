@@ -51,14 +51,13 @@ export function Hub({
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-6xl w-full">
             {blocks.map((b, i) => {
               const Icon = BLOCK_ICONS[b.id];
-              const rotate = ((i % 2) === 0 ? -1 : 1) * (1 + (i % 3) * 0.4);
               return (
                 <motion.button
                   key={b.id}
-                  initial={{ y: 40, opacity: 0, scale: 0.9 }}
-                  animate={{ y: 0, opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.1 + i * 0.06, duration: 0.55 }}
-                  whileHover={{ y: -6, scale: 1.03, rotate: 0 }}
+                  initial={{ y: 30, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.08 + i * 0.05, duration: 0.5 }}
+                  whileHover={{ y: -6, scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   onClick={() => onOpen(b.id)}
                   className="group focus:outline-none focus-visible:ring-4 focus-visible:ring-az-gold/60 rounded-2xl"
@@ -69,7 +68,6 @@ export function Hub({
                     subtitle={b.subtitle}
                     footer={`${b.slides.length} slidů`}
                     icon={Icon ? <Icon /> : undefined}
-                    rotate={rotate}
                   />
                 </motion.button>
               );
