@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Fraunces", Georgia, serif;
+  background: #1b1230;
+  color: #fff9ec;
+  overflow: hidden;
+}
+
+/* Playful hand-drawn dashed border helper */
+.trail-dash {
+  background-image: repeating-linear-gradient(
+    90deg,
+    currentColor 0 8px,
+    transparent 8px 16px
+  );
+}
+
+/* Subtle grain for desert feel */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+  background-image: radial-gradient(
+      circle at 20% 30%,
+      rgba(255, 255, 255, 0.6) 0,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 70% 60%,
+      rgba(0, 0, 0, 0.4) 0,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 40% 80%,
+      rgba(255, 255, 255, 0.4) 0,
+      transparent 1px
+    );
+  background-size: 3px 3px, 5px 5px, 4px 4px;
+}
