@@ -19,8 +19,9 @@ export default {
         },
       },
       fontFamily: {
-        display: ['"Bungee"', "system-ui", "sans-serif"],
+        display: ['"Rye"', "Georgia", "serif"],
         body: ['"Fraunces"', "Georgia", "serif"],
+        stamp: ['"Special Elite"', "Courier", "monospace"],
       },
       backgroundImage: {
         sunset:
