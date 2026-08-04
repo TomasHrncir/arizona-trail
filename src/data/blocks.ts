@@ -304,7 +304,7 @@ export const blocks: Block[] = [
         title: "V číslech",
         stats: [
           { value: "5 000 kcal", label: "denně" },
-          { value: "800 g", label: "jídla / den" },
+          { value: "carbs", label: "sladkosti každou hodinu" },
           { value: "5–7 dní", label: "mezi resupply" },
         ],
       },
