@@ -100,6 +100,9 @@ export function Lightbox({
               controls
               playsInline
               preload="auto"
+              onEnded={() => {
+                if (hasNext) onChange(index + 1);
+              }}
               className="max-h-[92vh] max-w-[88vw] object-contain rounded-xl shadow-2xl bg-black cursor-default"
               onClick={(e) => e.stopPropagation()}
             />

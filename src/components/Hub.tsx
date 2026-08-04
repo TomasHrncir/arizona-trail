@@ -10,10 +10,14 @@ import { DesertScene } from "./DesertScene";
 import { PosterSky } from "./PosterSky";
 import { Lightbox, type LightboxItem } from "./Lightbox";
 
-const COW_REEL: LightboxItem = {
-  kind: "video",
-  src: "/media/cow/cow.mp4",
-};
+const COW_SEQUENCE: LightboxItem[] = [
+  { kind: "video", src: "/media/cow/cow.mp4" },
+  {
+    kind: "image",
+    src: "/media/cow/end.jpeg",
+    alt: "Poslední den — Arizona Trail terminus, 1 020 km, 26 dní",
+  },
+];
 
 export function Hub({
   blocks,
@@ -22,7 +26,7 @@ export function Hub({
   blocks: Block[];
   onOpen: (blockId: string) => void;
 }) {
-  const [cowOpen, setCowOpen] = useState(false);
+  const [cowIdx, setCowIdx] = useState<number | null>(null);
 
   return (
     <div
@@ -52,7 +56,7 @@ export function Hub({
       {/* Standalone cow overlay — click opens IG reel */}
       <button
         type="button"
-        onClick={() => setCowOpen(true)}
+        onClick={() => setCowIdx(0)}
         aria-label="Přehrát video s krávou"
         className="absolute z-20 focus:outline-none focus-visible:ring-2 focus-visible:ring-az-gold rounded-2xl"
         style={{
@@ -121,10 +125,10 @@ export function Hub({
       </div>
 
       <Lightbox
-        items={[COW_REEL]}
-        index={cowOpen ? 0 : null}
-        onClose={() => setCowOpen(false)}
-        onChange={() => undefined}
+        items={COW_SEQUENCE}
+        index={cowIdx}
+        onClose={() => setCowIdx(null)}
+        onChange={setCowIdx}
       />
     </div>
   );
