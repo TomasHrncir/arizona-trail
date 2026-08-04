@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import type { Block } from "../data/blocks";
-import { DesertScene } from "./DesertScene";
+import { Cow } from "./Cow";
 import { CortenSign } from "./CortenSign";
 import { BLOCK_ICONS } from "./BlockIcons";
 import { Tumbleweed } from "./Tumbleweed";
 import { DustMotes } from "./DustMotes";
-import { PosterSky } from "./PosterSky";
 import { Lightbox, type LightboxItem } from "./Lightbox";
 
 const COW_REEL: LightboxItem = {
@@ -28,43 +27,37 @@ export function Hub({
       className="relative h-full w-full overflow-hidden grain"
       style={{
         background:
-          "linear-gradient(180deg, #B8CFC4 0%, #C4D6C9 45%, #D9C5A6 62%, #E4B98A 74%, #D9944A 100%)",
+          "url('/media/hub/bg.jpeg') center center / cover no-repeat, #E4B98A",
       }}
     >
-      {/* Sky with sun + stars + cloud bands */}
-      <div className="absolute inset-0 pointer-events-none">
-        <PosterSky className="w-full h-full" />
-      </div>
-
-      {/* Dust particles floating up */}
+      {/* Warm dust motes drifting up (kept for atmosphere) */}
       <DustMotes />
 
-      {/* Desert horizon (Monument Valley mesas + cacti + agaves) — decorative,
-          non-interactive, sits behind the tile grid. */}
-      <div className="absolute inset-x-0 bottom-0 h-[55%] pointer-events-none">
-        <DesertScene className="w-full h-full" />
-      </div>
+      {/* Tumbleweeds rolling across */}
+      <Tumbleweed duration={16} delay={3} size={72} yOffsetPct={87} />
+      <Tumbleweed duration={22} delay={12} size={48} yOffsetPct={82} />
 
-      {/* Invisible hitbox positioned over the cow — foreground so it beats
-          the tile grid to clicks. */}
+      {/* Standalone cow — sits above the painting, click opens IG reel */}
       <button
         type="button"
         onClick={() => setCowOpen(true)}
         aria-label="Přehrát video s krávou"
-        className="absolute z-30 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-az-gold cursor-pointer"
+        className="absolute z-20 focus:outline-none focus-visible:ring-2 focus-visible:ring-az-gold rounded-2xl"
         style={{
-          left: "54%",
-          bottom: "2vh",
+          left: "50%",
+          bottom: "3vh",
           transform: "translateX(-50%)",
-          width: "120px",
-          height: "70px",
-          background: "transparent",
         }}
-      />
-
-      {/* Tumbleweeds rolling */}
-      <Tumbleweed duration={16} delay={3} size={72} yOffsetPct={87} />
-      <Tumbleweed duration={22} delay={12} size={48} yOffsetPct={82} />
+      >
+        <svg
+          viewBox="-70 -60 150 80"
+          width="160"
+          height="85"
+          style={{ overflow: "visible" }}
+        >
+          <Cow x={0} baseY={0} scale={1.3} />
+        </svg>
+      </button>
 
       <div className="relative z-10 flex h-full flex-col justify-center items-center px-10 py-6">
         <header className="text-center mb-[100px]">
