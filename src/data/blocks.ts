@@ -430,7 +430,8 @@ export const blocks: Block[] = [
         id: "lide-5",
         layout: "text",
         title: "Ostatní hikeři",
-        body: "Potkal jsem asi 6 thru-hikerů za celou dobu, spal jsem většinu nocí sám. Nejvíc lidí bylo kolem Grand Canyonu.",
+        body:
+          "Potkal jsem asi 6 thru-hikerů za celou dobu, spal jsem většinu nocí sám. Nejvíc lidí bylo kolem Grand Canyonu.\n\nS nikým fotku nemám, tady jsou aspoň z PCT.",
         media: [
           {
             kind: "image",
