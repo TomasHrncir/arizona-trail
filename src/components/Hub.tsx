@@ -60,7 +60,7 @@ export function Hub({
           </motion.p>
         </header>
 
-        <main className="flex-1 flex items-start justify-center pt-2">
+        <main className="flex-1 flex items-center justify-center">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-6xl w-full">
             {blocks.map((b, i) => {
               const Icon = BLOCK_ICONS[b.id];
