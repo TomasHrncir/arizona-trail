@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import type { Block } from "../data/blocks";
 import { DesertScene } from "./DesertScene";
@@ -6,6 +7,12 @@ import { BLOCK_ICONS } from "./BlockIcons";
 import { Tumbleweed } from "./Tumbleweed";
 import { DustMotes } from "./DustMotes";
 import { PosterSky } from "./PosterSky";
+import { Lightbox, type LightboxItem } from "./Lightbox";
+
+const COW_REEL: LightboxItem = {
+  kind: "instagram",
+  src: "https://www.instagram.com/p/DZkrf6Ftdgx/",
+};
 
 export function Hub({
   blocks,
@@ -14,6 +21,8 @@ export function Hub({
   blocks: Block[];
   onOpen: (blockId: string) => void;
 }) {
+  const [cowOpen, setCowOpen] = useState(false);
+
   return (
     <div
       className="relative h-full w-full overflow-hidden grain"
@@ -30,9 +39,13 @@ export function Hub({
       {/* Dust particles floating up */}
       <DustMotes />
 
-      {/* Desert horizon (Monument Valley mesas + cacti + agaves) */}
+      {/* Desert horizon (Monument Valley mesas + cacti + agaves).
+          Cow inside is clickable — opens IG reel in the lightbox. */}
       <div className="absolute inset-x-0 bottom-0 h-[55%] pointer-events-none">
-        <DesertScene className="w-full h-full" />
+        <DesertScene
+          className="w-full h-full"
+          onCowClick={() => setCowOpen(true)}
+        />
       </div>
 
       {/* Tumbleweeds rolling */}
@@ -87,6 +100,13 @@ export function Hub({
           </div>
         </main>
       </div>
+
+      <Lightbox
+        items={[COW_REEL]}
+        index={cowOpen ? 0 : null}
+        onClose={() => setCowOpen(false)}
+        onChange={() => undefined}
+      />
     </div>
   );
 }

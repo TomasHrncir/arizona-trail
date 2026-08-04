@@ -499,6 +499,9 @@ export const blocks: Block[] = [
         layout: "text",
         title: "Jak mi došla voda",
         body: "Musel jsem pít zkaženou vodu a byl jsem silně dehydratovaný.",
+        media: [
+          { kind: "video", src: "/media/prihody-voda/1.mov" },
+        ],
       },
       {
         id: "prihody-3",
@@ -526,6 +529,9 @@ export const blocks: Block[] = [
         layout: "text",
         title: "Tříska",
         body: "3 dny v noze a nechtělo se jí ven.",
+        media: [
+          { kind: "video", src: "/media/prihody-5/1.mp4" },
+        ],
       },
     ],
   },

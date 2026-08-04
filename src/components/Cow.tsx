@@ -17,11 +17,13 @@ export function Cow({
   baseY,
   scale = 1,
   flip = false,
+  onClick,
 }: {
   x: number;
   baseY: number;
   scale?: number;
   flip?: boolean;
+  onClick?: () => void;
 }) {
   const HIDE = "#F4EEE3";
   const HIDE_SHADE = "#D6C6AF";
@@ -34,7 +36,13 @@ export function Cow({
   const dir = flip ? -1 : 1;
 
   return (
-    <g transform={`translate(${x} ${baseY}) scale(${scale * dir}, ${scale})`}>
+    <g
+      transform={`translate(${x} ${baseY}) scale(${scale * dir}, ${scale})`}
+      onClick={onClick}
+      style={onClick ? { cursor: "pointer", pointerEvents: "auto" } : undefined}
+      role={onClick ? "button" : undefined}
+      aria-label={onClick ? "Přehrát video s krávou" : undefined}
+    >
       {/* ---------- FAR (background) LEGS ---------- */}
       <Leg x={-22} shade />
       <Leg x={22} shade />

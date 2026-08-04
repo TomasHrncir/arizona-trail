@@ -13,7 +13,13 @@ const CACTUS_LITE = "#547A4E";
 const CACTUS_SPINE = "rgba(20, 40, 22, 0.45)";
 const SHRUB_FILL = "#3E5A45";
 
-export function DesertScene({ className = "" }: { className?: string }) {
+export function DesertScene({
+  className = "",
+  onCowClick,
+}: {
+  className?: string;
+  onCowClick?: () => void;
+}) {
   return (
     <svg
       viewBox="0 0 1600 620"
@@ -59,7 +65,7 @@ export function DesertScene({ className = "" }: { className?: string }) {
         <Saguaro x={1420} baseY={555} scale={1.1} arms={3} phase={1.1} />
 
         {/* Lone cow between saguaros — stares, tail wags, ear twitches */}
-        <Cow x={870} baseY={578} scale={1.15} flip={false} />
+        <Cow x={870} baseY={578} scale={1.15} flip={false} onClick={onCowClick} />
 
         {/* Small dark-green shrubs (foreground clumps) */}
         <Shrub x={90} baseY={600} scale={1.1} />
