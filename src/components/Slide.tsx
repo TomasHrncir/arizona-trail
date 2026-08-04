@@ -1,5 +1,7 @@
+import { useState } from "react";
 import type { MediaItem, Slide as SlideType } from "../data/blocks";
 import { MediaTile } from "./MediaTile";
+import { Lightbox } from "./Lightbox";
 
 /**
  * Presentation slide.
@@ -41,9 +43,9 @@ function Stage({
 }) {
   return (
     <div
-      className={`h-full w-full flex items-center justify-center px-16 md:px-24 py-10 ${className}`}
+      className={`h-full w-full flex items-center justify-center px-12 md:px-16 py-8 ${className}`}
     >
-      <div className="w-full max-w-5xl">{children}</div>
+      <div className="w-full max-w-6xl">{children}</div>
     </div>
   );
 }
@@ -76,13 +78,18 @@ function TitleSlide({ slide }: { slide: SlideType }) {
 
 function TextSlide({ slide }: { slide: SlideType }) {
   const media = slide.media ?? [];
+  const [openSrc, setOpenSrc] = useState<{
+    src: string;
+    alt?: string;
+  } | null>(null);
+
   return (
     <Stage>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
+      <div className="grid grid-cols-1 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-8 md:gap-14 items-center">
         <div className="text-left">
           {slide.title && (
             <h2
-              className="font-display text-white text-4xl md:text-5xl lg:text-6xl leading-tight uppercase"
+              className="font-display text-white text-4xl md:text-5xl leading-tight uppercase"
               style={{
                 textShadow:
                   "0 3px 0 rgba(0,0,0,0.35), 0 6px 20px rgba(0,0,0,0.5)",
@@ -92,20 +99,34 @@ function TextSlide({ slide }: { slide: SlideType }) {
             </h2>
           )}
           {slide.body && (
-            <p className="mt-6 font-body text-white text-xl md:text-2xl leading-relaxed">
+            <p className="mt-6 font-body text-white text-lg md:text-xl leading-relaxed">
               {slide.body}
             </p>
           )}
         </div>
 
-        <MediaGrid items={media} />
+        <MediaGrid
+          items={media}
+          onOpenImage={(src, alt) => setOpenSrc({ src, alt })}
+        />
       </div>
+
+      <Lightbox
+        src={openSrc?.src ?? null}
+        alt={openSrc?.alt}
+        onClose={() => setOpenSrc(null)}
+      />
     </Stage>
   );
 }
 
-function MediaGrid({ items }: { items: MediaItem[] }) {
-  // Always render 4 slots — fill with real items first, rest become placeholders.
+function MediaGrid({
+  items,
+  onOpenImage,
+}: {
+  items: MediaItem[];
+  onOpenImage: (src: string, alt?: string) => void;
+}) {
   const slots: (MediaItem | undefined)[] = [
     items[0],
     items[1],
@@ -113,9 +134,9 @@ function MediaGrid({ items }: { items: MediaItem[] }) {
     items[3],
   ];
   return (
-    <div className="grid grid-cols-2 gap-3 md:gap-4">
+    <div className="grid grid-cols-2 gap-4 md:gap-5">
       {slots.map((it, i) => (
-        <MediaTile key={i} item={it} />
+        <MediaTile key={i} item={it} onOpenImage={onOpenImage} />
       ))}
     </div>
   );
@@ -170,18 +191,11 @@ function ImageSlide({ slide }: { slide: SlideType }) {
           <Placeholder label="obrázek" />
         )}
       </div>
-      {(slide.title || slide.caption) && (
+      {slide.title && (
         <div className="text-center mt-6">
-          {slide.title && (
-            <div className="font-display text-white text-3xl uppercase">
-              {slide.title}
-            </div>
-          )}
-          {slide.caption && (
-            <div className="font-body text-az-sand italic text-lg mt-2">
-              {slide.caption}
-            </div>
-          )}
+          <div className="font-display text-white text-3xl uppercase">
+            {slide.title}
+          </div>
         </div>
       )}
     </div>
@@ -202,18 +216,11 @@ function VideoSlide({ slide }: { slide: SlideType }) {
           <Placeholder label="video" />
         )}
       </div>
-      {(slide.title || slide.caption) && (
+      {slide.title && (
         <div className="text-center mt-6">
-          {slide.title && (
-            <div className="font-display text-white text-3xl uppercase">
-              {slide.title}
-            </div>
-          )}
-          {slide.caption && (
-            <div className="font-body text-az-sand italic text-lg mt-2">
-              {slide.caption}
-            </div>
-          )}
+          <div className="font-display text-white text-3xl uppercase">
+            {slide.title}
+          </div>
         </div>
       )}
     </div>
@@ -246,27 +253,39 @@ function StatsSlide({ slide }: { slide: SlideType }) {
       <div className="flex flex-col items-center">
         {slide.title && (
           <h2
-            className="font-display text-white text-5xl md:text-6xl mb-12 uppercase"
+            className="font-display text-white text-4xl md:text-5xl mb-6 uppercase"
             style={{ textShadow: "0 3px 0 rgba(0,0,0,0.35)" }}
           >
             {slide.title}
           </h2>
         )}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 w-full">
           {slide.stats?.map((s, i) => (
             <div
               key={i}
-              className="rounded-3xl bg-white/10 backdrop-blur px-6 py-10 text-center ring-1 ring-white/20"
+              className="rounded-2xl bg-white/10 backdrop-blur px-4 py-6 text-center ring-1 ring-white/20"
             >
-              <div className="font-display text-az-gold text-4xl md:text-5xl leading-tight">
+              <div className="font-display text-az-gold text-3xl md:text-4xl leading-tight">
                 {s.value}
               </div>
-              <div className="mt-3 font-body text-white/90 italic text-lg">
+              <div className="mt-2 font-body text-white/90 italic text-base">
                 {s.label}
               </div>
             </div>
           ))}
         </div>
+        {slide.mapEmbed && (
+          <div className="mt-6 w-full rounded-2xl overflow-hidden ring-1 ring-white/20 shadow-2xl bg-black/30 aspect-[16/8]">
+            <iframe
+              src={slide.mapEmbed}
+              title="Mapa trasy"
+              className="w-full h-full border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
+        )}
       </div>
     </Stage>
   );

@@ -36,6 +36,8 @@ export type Slide = {
    * when this is undefined, so the layout is ready to receive media.
    */
   media?: MediaItem[];
+  /** Optional iframe URL — used by stats slides to embed a map. */
+  mapEmbed?: string;
 };
 
 export type Block = {
@@ -71,12 +73,40 @@ export const blocks: Block[] = [
           { value: "24 000 m", label: "nastoupáno" },
           { value: "26 dní", label: "na trailu" },
         ],
+        mapEmbed:
+          "https://mapy.com/cs/turisticka?source=osm&id=1080840971&ds=1&x=-111.6015793&y=33.5065270&z=8&embed=1",
       },
       {
         id: "intro-3",
         layout: "text",
         title: "Co je thruhiking?",
         body: "Thruhiking je pěší putování na dlouhé trati (obvykle stovky až tisíce kilometrů), kdy člověk projde celou trasu vytyčené dálkové stezky v jednom nepřerušeném tahu, obvykle během jedné sezóny.",
+        media: [
+          {
+            kind: "image",
+            src: "/media/intro-3/1.jpeg",
+            alt: "Nohy v ponožkách, Mount Jefferson v pozadí",
+            caption: "Odpočinek s výhledem",
+          },
+          {
+            kind: "image",
+            src: "/media/intro-3/2.jpeg",
+            alt: "Parta hikerů u cedule California / Oregon border, PCT",
+            caption: "Hranice California / Oregon",
+          },
+          {
+            kind: "image",
+            src: "/media/intro-3/3.jpeg",
+            alt: "Emergency room s ortézou",
+            caption: "Když tělo řekne dost",
+          },
+          {
+            kind: "image",
+            src: "/media/intro-3/4.jpeg",
+            alt: "Skok na kameni před zasněženou horou",
+            caption: "A když říká víc",
+          },
+        ],
       },
       {
         id: "intro-4",
