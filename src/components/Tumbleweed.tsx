@@ -48,8 +48,28 @@ export function Tumbleweed({
         },
       }}
     >
+      {/* Trailing dust puffs — sit behind the tumbleweed */}
+      <div
+        className="pointer-events-none absolute"
+        style={{
+          right: "60%",
+          top: "35%",
+          width: size * 1.8,
+          height: size * 0.4,
+        }}
+      >
+        <svg viewBox="0 0 100 22" className="h-full w-full">
+          <g fill="#EFE3C4">
+            <ellipse cx="85" cy="14" rx="10" ry="4" opacity="0.55" />
+            <ellipse cx="65" cy="12" rx="12" ry="5" opacity="0.42" />
+            <ellipse cx="42" cy="13" rx="14" ry="5" opacity="0.28" />
+            <ellipse cx="18" cy="14" rx="12" ry="4" opacity="0.16" />
+          </g>
+        </svg>
+      </div>
+
       <motion.div
-        className="h-full w-full"
+        className="relative h-full w-full"
         animate={{ rotate: 360 }}
         transition={{
           duration: 1.8,

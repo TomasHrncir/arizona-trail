@@ -21,6 +21,41 @@ export function DesertScene({ className = "" }: { className?: string }) {
       preserveAspectRatio="xMidYMax slice"
       aria-hidden
     >
+      <defs>
+        {/* Screen-print noise — subtle grain we bake into the shape fills */}
+        <filter id="screen-noise" x="0" y="0" width="100%" height="100%">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.9"
+            numOctaves="2"
+            seed="7"
+          />
+          <feColorMatrix
+            values="0 0 0 0 0
+                    0 0 0 0 0
+                    0 0 0 0 0
+                    0 0 0 0.15 0"
+          />
+          <feComposite in2="SourceGraphic" operator="in" />
+        </filter>
+        {/* Broader paper-grain for the sand — coarser, lower opacity */}
+        <filter id="sand-noise" x="0" y="0" width="100%" height="100%">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.6 0.8"
+            numOctaves="1"
+            seed="13"
+          />
+          <feColorMatrix
+            values="0 0 0 0 0
+                    0 0 0 0 0
+                    0 0 0 0 0
+                    0 0 0 0.1 0"
+          />
+          <feComposite in2="SourceGraphic" operator="in" />
+        </filter>
+      </defs>
+
       {/* --------- ATMOSPHERIC MOUNTAIN LAYERS --------- */}
 
       {/* Distant mauve — soft rolling hills, low opacity for haze */}
@@ -60,6 +95,26 @@ export function DesertScene({ className = "" }: { className?: string }) {
         fill="#A6421E"
       />
 
+      {/* Bake a subtle noise into the front range for screen-print feel */}
+      <path
+        d="M0 445
+           Q 90 430 190 448
+           L280 400
+           L400 450
+           Q 500 440 620 452
+           L740 415
+           L860 458
+           Q 980 442 1100 460
+           L1220 420
+           L1330 458
+           Q 1440 445 1560 460
+           L1600 452
+           L1600 500 L0 500 Z"
+        fill="#000"
+        filter="url(#screen-noise)"
+        opacity="0.35"
+      />
+
       {/* --------- HAZE BAND at horizon (thin light strip) --------- */}
       <rect
         x="0"
@@ -72,11 +127,43 @@ export function DesertScene({ className = "" }: { className?: string }) {
 
       {/* --------- SAND --------- */}
       <path d="M0 500 L1600 500 L1600 620 L0 620 Z" fill="#D9944A" />
+      {/* Paper-grain baked into the sand */}
+      <rect
+        x="0"
+        y="500"
+        width="1600"
+        height="120"
+        fill="#000"
+        filter="url(#sand-noise)"
+        opacity="0.35"
+      />
       {/* Sand shading under the front range */}
       <path
         d="M0 506 Q 400 496 800 506 T 1600 501 L 1600 522 Q 1200 514 800 522 T 0 520 Z"
         fill="#B67130"
         opacity="0.55"
+      />
+
+      {/* --------- TRAIL PATH — winding from foreground to horizon --------- */}
+      <path
+        d="M 780 620
+           C 780 590, 720 570, 740 545
+           C 760 525, 830 520, 820 500
+           L 815 498"
+        stroke="#F1D9A8"
+        strokeWidth="14"
+        strokeLinecap="round"
+        fill="none"
+        opacity="0.55"
+      />
+      {/* Trail narrowing to distance */}
+      <path
+        d="M 820 500 L 815 498"
+        stroke="#F1D9A8"
+        strokeWidth="4"
+        strokeLinecap="round"
+        fill="none"
+        opacity="0.4"
       />
 
       {/* --------- FLORA --------- */}
