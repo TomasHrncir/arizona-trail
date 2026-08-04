@@ -67,20 +67,8 @@ export const blocks: Block[] = [
       {
         id: "intro-4",
         layout: "text",
-        title: "Velké thruhiky světa",
-        body: "AT (Appalachian) 3 500 km, PCT (Pacific Crest) 4 300 km, CDT 4 900 km, TA (Te Araroa) 3 000 km. AZT je „malý“, zato divoký a málo lidí.",
-      },
-      {
-        id: "intro-5",
-        layout: "text",
-        title: "FKT — Fastest Known Time",
-        body: "Rekord na AZT drží Michelino Sunseri — okolo 10 dní. Kombinace ultramaratonu a soběstačnosti. Já šel na klasický thru, ne na FKT.",
-      },
-      {
-        id: "intro-6",
-        layout: "text",
-        title: "Kdy jít",
-        body: "Jaro (březen–květen) nebo podzim (září–listopad). V létě v poušti umřeš, v zimě v horách zmrzneš.",
+        title: "Velké thruhiky & FKT",
+        body: "AT (Appalachian) 3 500 km · PCT 4 300 km · CDT 4 900 km · TA (Te Araroa) 3 000 km. AZT je z nich nejmenší, zato divoký. FKT drží Nick Fowler — self-supported za 12 d 17 h (2024). Unsupported Art Brody: 28 d 3 h (2021).",
       },
     ],
   },
