@@ -78,6 +78,8 @@ function TitleSlide({ slide }: { slide: SlideType }) {
 
 function TextSlide({ slide }: { slide: SlideType }) {
   const media = slide.media ?? [];
+  const hasMedia = media.length > 0;
+
   // All media (images + videos) are shown in the lightbox in slide order.
   const lightboxItems: LightboxItem[] = useMemo(
     () =>
@@ -96,6 +98,47 @@ function TextSlide({ slide }: { slide: SlideType }) {
     const i = lightboxItems.findIndex((it) => it.src === src);
     setOpenIdx(i >= 0 ? i : null);
   };
+
+  // No media → center text alone, no grid, no placeholders.
+  if (!hasMedia) {
+    return (
+      <Stage className="text-center">
+        <div className="flex flex-col items-center max-w-4xl mx-auto">
+          {slide.title && (
+            <h2
+              className="font-display text-white text-5xl md:text-6xl leading-tight uppercase"
+              style={{
+                textShadow:
+                  "0 3px 0 rgba(0,0,0,0.35), 0 6px 20px rgba(0,0,0,0.5)",
+              }}
+            >
+              {slide.title}
+            </h2>
+          )}
+          {slide.body && (
+            <div className="mt-8 font-body text-white text-xl md:text-2xl leading-relaxed space-y-4">
+              {slide.body.split(/\n{2,}/).map((para, i) => (
+                <p key={i} className="whitespace-pre-line">
+                  {para}
+                </p>
+              ))}
+            </div>
+          )}
+          {slide.source && (
+            <a
+              href={slide.source.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-1.5 font-stamp text-xs uppercase tracking-widest text-az-gold/90 hover:text-az-gold underline decoration-az-gold/40 hover:decoration-az-gold underline-offset-4"
+            >
+              zdroj: {slide.source.label ?? new URL(slide.source.url).hostname}
+              <span aria-hidden>↗</span>
+            </a>
+          )}
+        </div>
+      </Stage>
+    );
+  }
 
   return (
     <Stage>

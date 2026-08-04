@@ -413,11 +413,15 @@ export const blocks: Block[] = [
         media: [
           {
             kind: "image",
-            src: "/media/lide-4/1.jpeg",
+            src: "/media/lide-4/1.webp",
             alt: "MJ před fialovým domem v Superioru",
           },
           { kind: "video", src: "/media/lide-4/2.mov" },
           { kind: "video", src: "/media/lide-4/3.mov" },
+          {
+            kind: "instagram",
+            src: "https://www.instagram.com/p/DYQobXVi4Ao/",
+          },
         ],
       },
       {
@@ -429,60 +433,7 @@ export const blocks: Block[] = [
     ],
   },
 
-  /* --------------------------- 7. Příhody --------------------------- */
-  {
-    id: "prihody",
-    title: "Příhody",
-    subtitle: "Zajímavosti a překvapení",
-    icon: "⚡",
-    accent: "plum",
-    slides: [
-      {
-        id: "prihody-1",
-        layout: "title",
-        title: "Příhody",
-        subtitle: "Co si pamatuju nejvíc",
-      },
-      {
-        id: "prihody-2",
-        layout: "text",
-        title: "Došla mi voda",
-        body: "[Detail doplním před přednáškou — kde, kolik chybělo, jak jsem to řešil.]",
-        media: [
-          {
-            kind: "instagram",
-            src: "https://www.instagram.com/p/DYQobXVi4Ao/",
-          },
-        ],
-      },
-      {
-        id: "prihody-3",
-        layout: "text",
-        title: "Noc na dně Grand Canyonu",
-        body: "40 °C ve dne, 25 °C v noci u řeky Colorado. Zvuk vody místo ticha.",
-      },
-      {
-        id: "prihody-4",
-        layout: "text",
-        title: "Záda",
-        body: "[Okolnosti a řešení doplním před přednáškou.]",
-      },
-      {
-        id: "prihody-5",
-        layout: "text",
-        title: "Puchýře",
-        body: "Přes všechen Squirrel's Nut Butter. Kdy, jak, co pomohlo.",
-      },
-      {
-        id: "prihody-6",
-        layout: "text",
-        title: "Zarostlá tříska",
-        body: "Ten okamžik, kdy „tohle nechci ani vidět“. Řešení v terénu.",
-      },
-    ],
-  },
-
-  /* --------------------------- 8. Vybavení --------------------------- */
+  /* --------------------------- 7. Vybavení --------------------------- */
   {
     id: "vybaveni",
     title: "Vybavení",
@@ -547,6 +498,59 @@ export const blocks: Block[] = [
         layout: "text",
         title: "Lékárnička · 0,3 kg",
         body: "SPF 50, Squirrel's Nut Butter (proti odřeninám — kritické), leukoplast, Paralen, Aulin, Ibaglin, Imodium, špunty do uší, fixing kit na karimatku a stan.",
+      },
+    ],
+  },
+
+  /* --------------------------- 8. Příhody --------------------------- */
+  {
+    id: "prihody",
+    title: "Příhody",
+    subtitle: "Zajímavosti a překvapení",
+    icon: "⚡",
+    accent: "plum",
+    slides: [
+      {
+        id: "prihody-1",
+        layout: "title",
+        title: "Příhody",
+        subtitle: "Co si pamatuju nejvíc",
+      },
+      {
+        id: "prihody-2",
+        layout: "text",
+        title: "Došla mi voda",
+        body: "[Detail doplním před přednáškou — kde, kolik chybělo, jak jsem to řešil.]",
+        media: [
+          {
+            kind: "instagram",
+            src: "https://www.instagram.com/p/DYQobXVi4Ao/",
+          },
+        ],
+      },
+      {
+        id: "prihody-3",
+        layout: "text",
+        title: "Noc na dně Grand Canyonu",
+        body: "40 °C ve dne, 25 °C v noci u řeky Colorado. Zvuk vody místo ticha.",
+      },
+      {
+        id: "prihody-4",
+        layout: "text",
+        title: "Záda",
+        body: "[Okolnosti a řešení doplním před přednáškou.]",
+      },
+      {
+        id: "prihody-5",
+        layout: "text",
+        title: "Puchýře",
+        body: "Přes všechen Squirrel's Nut Butter. Kdy, jak, co pomohlo.",
+      },
+      {
+        id: "prihody-6",
+        layout: "text",
+        title: "Zarostlá tříska",
+        body: "Ten okamžik, kdy „tohle nechci ani vidět“. Řešení v terénu.",
       },
     ],
   },
