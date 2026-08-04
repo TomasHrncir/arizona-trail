@@ -144,27 +144,6 @@ export function DesertScene({ className = "" }: { className?: string }) {
         opacity="0.55"
       />
 
-      {/* --------- TRAIL PATH — winding from foreground to horizon --------- */}
-      <path
-        d="M 780 620
-           C 780 590, 720 570, 740 545
-           C 760 525, 830 520, 820 500
-           L 815 498"
-        stroke="#F1D9A8"
-        strokeWidth="14"
-        strokeLinecap="round"
-        fill="none"
-        opacity="0.55"
-      />
-      {/* Trail narrowing to distance */}
-      <path
-        d="M 820 500 L 815 498"
-        stroke="#F1D9A8"
-        strokeWidth="4"
-        strokeLinecap="round"
-        fill="none"
-        opacity="0.4"
-      />
 
       {/* --------- FLORA --------- */}
       <g>

@@ -11,8 +11,8 @@ import { PosterSky } from "./PosterSky";
 import { Lightbox, type LightboxItem } from "./Lightbox";
 
 const COW_REEL: LightboxItem = {
-  kind: "instagram",
-  src: "https://www.instagram.com/p/DZkrf6Ftdgx/",
+  kind: "video",
+  src: "/media/cow/cow.mp4",
 };
 
 export function Hub({
