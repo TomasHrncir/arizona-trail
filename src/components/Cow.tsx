@@ -43,6 +43,17 @@ export function Cow({
       role={onClick ? "button" : undefined}
       aria-label={onClick ? "Přehrát video s krávou" : undefined}
     >
+      {/* Invisible hitbox that catches clicks over the whole cow */}
+      {onClick && (
+        <rect
+          x={-55}
+          y={-52}
+          width={120}
+          height={70}
+          fill="transparent"
+          style={{ pointerEvents: "auto" }}
+        />
+      )}
       {/* ---------- FAR (background) LEGS ---------- */}
       <Leg x={-22} shade />
       <Leg x={22} shade />

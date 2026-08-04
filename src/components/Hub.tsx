@@ -41,9 +41,9 @@ export function Hub({
 
       {/* Desert horizon (Monument Valley mesas + cacti + agaves).
           Cow inside is clickable — opens IG reel in the lightbox. */}
-      <div className="absolute inset-x-0 bottom-0 h-[55%] pointer-events-none">
+      <div className="absolute inset-x-0 bottom-0 h-[55%]">
         <DesertScene
-          className="w-full h-full"
+          className="w-full h-full pointer-events-none"
           onCowClick={() => setCowOpen(true)}
         />
       </div>
@@ -69,7 +69,7 @@ export function Hub({
             transition={{ delay: 0.2, duration: 0.6 }}
             className="mt-2 text-lg md:text-xl italic text-[#5C3520]"
           >
-            1 000 km od Mexika k Utahu
+            1 000 km od Mexika k Utahu za 26 dní
           </motion.p>
         </header>
 
