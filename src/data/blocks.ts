@@ -516,7 +516,10 @@ export const blocks: Block[] = [
         id: "prihody-4",
         layout: "text",
         title: "Záda",
-        body: "[Okolnosti a řešení doplním před přednáškou.]",
+        body: "Levá půlka zad přestala fungovat.",
+        media: [
+          { kind: "video", src: "/media/prihody-4/1.mov" },
+        ],
       },
       {
         id: "prihody-5",
