@@ -423,12 +423,6 @@ export const blocks: Block[] = [
         title: "Ostatní hikeři",
         body: "Za měsíc jsem potkal 12 lidí. Většinou stejný směr. Někteří se stali kamarády.",
       },
-      {
-        id: "lide-6",
-        layout: "text",
-        title: "Rancheři, řidiči",
-        body: "Cestou na hitchhike. Pick-up, chladák s pivem, „take one“.",
-      },
     ],
   },
 
