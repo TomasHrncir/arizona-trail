@@ -428,7 +428,7 @@ export const blocks: Block[] = [
         id: "lide-5",
         layout: "text",
         title: "Ostatní hikeři",
-        body: "Za měsíc jsem potkal 12 lidí. Většinou stejný směr. Někteří se stali kamarády.",
+        body: "Potkal jsem asi 6 thru-hikerů za celou dobu, spal jsem většinu nocí sám. Nejvíc lidí bylo kolem Grand Canyonu.",
       },
     ],
   },
