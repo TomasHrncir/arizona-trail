@@ -46,16 +46,16 @@ export const blocks: Block[] = [
         id: "intro-1",
         layout: "title",
         title: "Arizona Trail",
-        subtitle: "1 300 km od Mexika k Utahu",
+        subtitle: "1 000 km od Mexika k Utahu",
       },
       {
         id: "intro-2",
         layout: "stats",
         title: "V číslech",
         stats: [
-          { value: "1 300 km", label: "délka" },
+          { value: "1 000 km", label: "délka" },
           { value: "800 → 2 800 m", label: "rozpětí elevace" },
-          { value: "25–45 dní", label: "typický thru" },
+          { value: "26 dní", label: "můj čas na stezce" },
         ],
       },
       {
