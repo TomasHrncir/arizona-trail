@@ -414,8 +414,8 @@ export const blocks: Block[] = [
       {
         id: "lide-4",
         layout: "text",
-        title: "Konkrétně",
-        body: "[Konkrétní jména a příběhy doplním před přednáškou.]",
+        title: "Trail Angels",
+        body: "Jeff s manželkou\nMJ v Superioru\nWilliam v Kanab",
       },
       {
         id: "lide-5",
