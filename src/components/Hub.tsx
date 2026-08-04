@@ -19,7 +19,7 @@ export function Hub({
       className="relative h-full w-full overflow-hidden grain"
       style={{
         background:
-          "linear-gradient(180deg, #1A0F3D 0%, #3A144E 12%, #6B1B62 22%, #A62468 30%, #D63A63 38%, #F04E4E 45%, #F58C4E 52%, #FFCE3E 60%, #FFCE3E 100%)",
+          "linear-gradient(180deg, #B8CFC4 0%, #C4D6C9 45%, #D9C5A6 62%, #E4B98A 74%, #D9944A 100%)",
       }}
     >
       {/* Sky with sun + stars + cloud bands */}
@@ -39,13 +39,14 @@ export function Hub({
       <Tumbleweed duration={16} delay={3} size={72} yOffsetPct={87} />
       <Tumbleweed duration={22} delay={12} size={48} yOffsetPct={82} />
 
-      <div className="relative z-10 flex h-full flex-col px-10 py-6">
-        <header className="text-center pt-2 pb-2">
+      <div className="relative z-10 flex h-full flex-col px-10 py-8">
+        <header className="text-center pt-6 pb-6">
           <motion.h1
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.7 }}
-            className="font-display text-white text-5xl md:text-6xl tracking-wide drop-shadow-[0_4px_0_rgba(0,0,0,0.35)] uppercase"
+            className="font-display text-[#4A2418] text-7xl md:text-8xl lg:text-9xl tracking-wide uppercase leading-none"
+            style={{ textShadow: "0 3px 0 rgba(255,240,215,0.55)" }}
           >
             Arizona Trail
           </motion.h1>
@@ -53,7 +54,7 @@ export function Hub({
             initial={{ y: -10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="mt-1 text-lg text-az-sand italic"
+            className="mt-4 text-xl md:text-2xl italic text-[#5C3520]"
           >
             1 300 kilometrů od Mexika k Utahu — a co jsem si odnesl
           </motion.p>
