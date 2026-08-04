@@ -174,10 +174,10 @@ function MediaGrid({
     );
   }
 
-  // 2 items — 2 columns
+  // 2 items — stacked vertically to fill the height next to the text
   if (items.length === 2) {
     return (
-      <div className="grid grid-cols-2 gap-4 md:gap-5">
+      <div className="grid grid-cols-1 gap-4 md:gap-5">
         {items.map((it, i) => (
           <MediaTile key={i} item={it} onOpen={onOpen} />
         ))}

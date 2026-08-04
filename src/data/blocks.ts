@@ -124,11 +124,6 @@ export const blocks: Block[] = [
         media: [
           {
             kind: "image",
-            src: "/media/intro-4/1.jpeg",
-            alt: "Start a cíl AZT — split fotka",
-          },
-          {
-            kind: "image",
             src: "/media/intro-4/2.jpeg",
             alt: "AZT ze dřeva na cestě",
           },
