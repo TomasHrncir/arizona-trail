@@ -457,6 +457,13 @@ export const blocks: Block[] = [
           { value: "5,9 kg", label: "base weight" },
           { value: "~13 kg", label: "s vodou a jídlem" },
         ],
+        media: [
+          {
+            kind: "image",
+            src: "/media/vybaveni-2/1.jpeg",
+            alt: "Vybavení rozházené na trávě — batoh, hůlky, spacák, dromedáry, sáčky",
+          },
+        ],
       },
       {
         id: "vybaveni-3",
