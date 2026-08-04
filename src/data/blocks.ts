@@ -42,6 +42,8 @@ export type Slide = {
   mapEmbed?: string;
   /** Optional source / citation shown as a small link under the body. */
   source?: { url: string; label?: string };
+  /** Optional LighterPack embed — pass the short ID from lighterpack.com/r/<id>. */
+  lighterpack?: string;
 };
 
 export type Block = {
@@ -461,42 +463,18 @@ export const blocks: Block[] = [
         layout: "text",
         title: "Velká trojka · 2,3 kg",
         body: "Batoh Hyperlite Junction 55 (910 g), tarp Six Moon Designs Deschutes (632 g), spacák REI Magma 30 (737 g).",
+        media: [
+          {
+            kind: "instagram",
+            src: "https://www.instagram.com/p/DYflzhwC83Y/",
+          },
+        ],
       },
       {
         id: "vybaveni-4",
         layout: "text",
         title: "Spaní a vaření · 0,9 kg",
         body: "Karimatka Thermarest NeoAir (400 g). Vařič MSR Pocket Rocket (75 g), titanový hrnek Toaks 550 ml (74 g), plyn Jetboil 100 g. Vaří se jenom večer.",
-      },
-      {
-        id: "vybaveni-5",
-        layout: "text",
-        title: "Water system · 0,27 kg",
-        body: "Filtr Sawyer Squeeze (85 g), 2× Platypus 2 L dromedář (70 g), Cnoc Premium (41 g) a Smartwater 1 L (28 g) na dopití, Aquatabs jako záloha.",
-      },
-      {
-        id: "vybaveni-6",
-        layout: "text",
-        title: "Elektronika · 0,82 kg",
-        body: "iPhone (212 g), powerbank Nitecore NB10000 GEN4 (143 g), satelitní tracker Garmin InReach Mini 2 (100 g), čelovka Petzl Bindi (34 g), AirPods, AirTag.",
-      },
-      {
-        id: "vybaveni-7",
-        layout: "text",
-        title: "Oblečení v batohu · 1 kg",
-        body: "Péřovka Patagonia Micro Puff, baselayer Craft, bunda Salomon Bonatti, kalhoty Salomon S/Lab, náhradní ponožky Darn Tough, čepice, buff, rukavice.",
-      },
-      {
-        id: "vybaveni-8",
-        layout: "text",
-        title: "Worn on trail · 1,9 kg",
-        body: "Boty Hoka Mafate X, hůlky Black Diamond, hodinky Garmin Fenix 8, kraťasy Salomon, Rab Force Hoody, gaiters, čepice, brýle.",
-      },
-      {
-        id: "vybaveni-9",
-        layout: "text",
-        title: "Lékárnička · 0,3 kg",
-        body: "SPF 50, Squirrel's Nut Butter (proti odřeninám — kritické), leukoplast, Paralen, Aulin, Ibaglin, Imodium, špunty do uší, fixing kit na karimatku a stan.",
       },
     ],
   },

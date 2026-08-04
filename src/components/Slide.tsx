@@ -411,7 +411,15 @@ function StatsSlide({ slide }: { slide: SlideType }) {
             {slide.title}
           </h2>
         )}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 w-full">
+        <div
+          className={`grid grid-cols-1 gap-4 md:gap-6 w-full mx-auto ${
+            slide.stats && slide.stats.length === 1
+              ? "md:grid-cols-1 max-w-md"
+              : slide.stats && slide.stats.length === 2
+                ? "md:grid-cols-2 max-w-3xl"
+                : "md:grid-cols-3"
+          }`}
+        >
           {slide.stats?.map((s, i) => (
             <div
               key={i}
