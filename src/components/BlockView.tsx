@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { Block } from "../data/blocks";
 import { Slide } from "./Slide";
@@ -52,6 +52,23 @@ export function BlockView({
     return () => window.removeEventListener("keydown", onKey);
   }, [next, prev, onBack]);
 
+  /* Swipe navigation on touch devices */
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    touchStart.current = { x: t.clientX, y: t.clientY };
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (!touchStart.current) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStart.current.x;
+    const dy = t.clientY - touchStart.current.y;
+    touchStart.current = null;
+    if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.4) return;
+    if (dx < 0) next();
+    else prev();
+  };
+
   const slide = block.slides[idx];
 
   return (
@@ -66,23 +83,23 @@ export function BlockView({
       <BlockAnimation blockId={block.id} />
 
       {/* Top bar */}
-      <div className="relative z-20 flex items-center justify-between px-6 pt-5">
+      <div className="relative z-20 flex items-center justify-between px-4 md:px-6 pt-4 md:pt-5">
         <button
           onClick={onBack}
           aria-label="Zpět na hub (Esc)"
           title="Zpět (Esc)"
-          className="group flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 h-10 w-10 text-white/90 backdrop-blur ring-1 ring-white/20 transition"
+          className="group flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 h-9 w-9 md:h-10 md:w-10 text-white/90 backdrop-blur ring-1 ring-white/20 transition"
         >
-          <span className="text-xl leading-none">←</span>
+          <span className="text-lg md:text-xl leading-none">←</span>
         </button>
 
-        <div className="text-white/80 text-sm font-mono">
+        <div className="text-white/80 text-xs md:text-sm font-mono">
           {idx + 1} / {total}
         </div>
       </div>
 
       {/* Slide stage */}
-      <div className="absolute inset-0 pt-20 pb-24">
+      <div className="absolute inset-0 pt-16 md:pt-20 pb-20 md:pb-24">
         <AnimatePresence mode="wait" custom={dir}>
           <motion.div
             key={slide.id}
@@ -99,18 +116,18 @@ export function BlockView({
       </div>
 
       {/* Bottom controls */}
-      <div className="absolute inset-x-0 bottom-0 z-20 flex items-center justify-between px-6 pb-5">
+      <div className="absolute inset-x-0 bottom-0 z-20 flex items-center justify-between px-3 md:px-6 pb-4 md:pb-5">
         <button
           onClick={prev}
           disabled={idx === 0}
-          className="rounded-full bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:hover:bg-white/10 backdrop-blur ring-1 ring-white/20 h-14 w-14 flex items-center justify-center text-white text-2xl transition"
+          className="rounded-full bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:hover:bg-white/10 backdrop-blur ring-1 ring-white/20 h-11 w-11 md:h-14 md:w-14 flex items-center justify-center text-white text-xl md:text-2xl transition"
           aria-label="Předchozí"
         >
           ←
         </button>
 
         {/* Progress dots */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 md:gap-2">
           {block.slides.map((_, i) => (
             <button
               key={i}
@@ -118,10 +135,10 @@ export function BlockView({
                 setDir(i > idx ? 1 : -1);
                 setIdx(i);
               }}
-              className={`h-2 rounded-full transition-all ${
+              className={`h-1.5 md:h-2 rounded-full transition-all ${
                 i === idx
-                  ? "w-8 bg-az-gold"
-                  : "w-2 bg-white/40 hover:bg-white/70"
+                  ? "w-6 md:w-8 bg-az-gold"
+                  : "w-1.5 md:w-2 bg-white/40 hover:bg-white/70"
               }`}
               aria-label={`Slide ${i + 1}`}
             />
@@ -131,7 +148,7 @@ export function BlockView({
         <button
           onClick={next}
           disabled={idx === total - 1}
-          className="rounded-full bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:hover:bg-white/10 backdrop-blur ring-1 ring-white/20 h-14 w-14 flex items-center justify-center text-white text-2xl transition"
+          className="rounded-full bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:hover:bg-white/10 backdrop-blur ring-1 ring-white/20 h-11 w-11 md:h-14 md:w-14 flex items-center justify-center text-white text-xl md:text-2xl transition"
           aria-label="Další"
         >
           →

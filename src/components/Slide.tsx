@@ -45,7 +45,7 @@ function Stage({
   return (
     <div className="h-full w-full overflow-y-auto">
       <div
-        className={`min-h-full w-full flex items-center justify-center px-12 md:px-16 py-8 ${className}`}
+        className={`min-h-full w-full flex items-center justify-center px-4 sm:px-8 md:px-16 py-4 md:py-8 ${className}`}
       >
         <div className="w-full max-w-6xl">{children}</div>
       </div>
@@ -60,7 +60,7 @@ function TitleSlide({ slide }: { slide: SlideType }) {
     <Stage className="text-center">
       <div className="flex flex-col items-center">
         <h1
-          className="font-display text-white text-6xl md:text-8xl leading-[0.95] tracking-wide uppercase"
+          className="font-display text-white text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-wide uppercase"
           style={{
             textShadow:
               "0 4px 0 rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.55)",
@@ -69,11 +69,11 @@ function TitleSlide({ slide }: { slide: SlideType }) {
           {slide.title}
         </h1>
         {slide.subtitle && (
-          <p className="mt-8 font-body text-2xl md:text-3xl italic text-az-sand max-w-3xl leading-snug">
+          <p className="mt-4 md:mt-8 font-body text-lg sm:text-xl md:text-3xl italic text-az-sand max-w-3xl leading-snug">
             {slide.subtitle}
           </p>
         )}
-        <div className="mt-10 h-1 w-32 rounded bg-az-gold" />
+        <div className="mt-6 md:mt-10 h-1 w-24 md:w-32 rounded bg-az-gold" />
       </div>
     </Stage>
   );
@@ -109,7 +109,7 @@ function TextSlide({ slide }: { slide: SlideType }) {
         <div className="flex flex-col items-center max-w-4xl mx-auto">
           {slide.title && (
             <h2
-              className="font-display text-white text-5xl md:text-6xl leading-tight uppercase"
+              className="font-display text-white text-3xl sm:text-4xl md:text-6xl leading-tight uppercase"
               style={{
                 textShadow:
                   "0 3px 0 rgba(0,0,0,0.35), 0 6px 20px rgba(0,0,0,0.5)",
@@ -119,7 +119,7 @@ function TextSlide({ slide }: { slide: SlideType }) {
             </h2>
           )}
           {slide.body && (
-            <div className="mt-8 font-body text-white text-xl md:text-2xl leading-relaxed space-y-4">
+            <div className="mt-4 md:mt-8 font-body text-white text-base sm:text-lg md:text-2xl leading-relaxed space-y-3 md:space-y-4">
               {slide.body.split(/\n{2,}/).map((para, i) => (
                 <p key={i} className="whitespace-pre-line">
                   {para}
@@ -145,11 +145,11 @@ function TextSlide({ slide }: { slide: SlideType }) {
 
   return (
     <Stage>
-      <div className="grid grid-cols-1 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-8 md:gap-14 items-center">
+      <div className="grid grid-cols-1 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-6 md:gap-14 items-center">
         <div className="text-left">
           {slide.title && (
             <h2
-              className="font-display text-white text-4xl md:text-5xl leading-tight uppercase"
+              className="font-display text-white text-3xl sm:text-4xl md:text-5xl leading-tight uppercase"
               style={{
                 textShadow:
                   "0 3px 0 rgba(0,0,0,0.35), 0 6px 20px rgba(0,0,0,0.5)",
@@ -159,7 +159,7 @@ function TextSlide({ slide }: { slide: SlideType }) {
             </h2>
           )}
           {slide.body && (
-            <div className="mt-6 font-body text-white text-lg md:text-xl leading-relaxed space-y-4">
+            <div className="mt-4 md:mt-6 font-body text-white text-base sm:text-lg md:text-xl leading-relaxed space-y-3 md:space-y-4">
               {slide.body.split(/\n{2,}/).map((para, i) => (
                 <p key={i} className="whitespace-pre-line">
                   {para}
@@ -414,7 +414,7 @@ function StatsSlide({ slide }: { slide: SlideType }) {
       <div className="flex flex-col items-center">
         {slide.title && (
           <h2
-            className="font-display text-white text-4xl md:text-5xl mb-6 uppercase"
+            className="font-display text-white text-3xl sm:text-4xl md:text-5xl mb-4 md:mb-6 uppercase"
             style={{ textShadow: "0 3px 0 rgba(0,0,0,0.35)" }}
           >
             {slide.title}
@@ -432,12 +432,12 @@ function StatsSlide({ slide }: { slide: SlideType }) {
           {slide.stats?.map((s, i) => (
             <div
               key={i}
-              className="rounded-2xl bg-white/10 backdrop-blur px-4 py-6 text-center ring-1 ring-white/20"
+              className="rounded-2xl bg-white/10 backdrop-blur px-3 py-4 md:px-4 md:py-6 text-center ring-1 ring-white/20"
             >
-              <div className="font-display text-az-gold text-3xl md:text-4xl leading-tight">
+              <div className="font-display text-az-gold text-2xl sm:text-3xl md:text-4xl leading-tight">
                 {s.value}
               </div>
-              <div className="mt-2 font-body text-white/90 italic text-base">
+              <div className="mt-1 md:mt-2 font-body text-white/90 italic text-sm md:text-base">
                 {s.label}
               </div>
             </div>

@@ -12,8 +12,16 @@ html,
 body,
 #root {
   height: 100%;
+  height: 100svh;
   margin: 0;
   padding: 0;
+}
+
+/* Never bounce/scroll the outer chrome on iOS */
+html,
+body {
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {

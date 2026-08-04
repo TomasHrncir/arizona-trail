@@ -131,7 +131,7 @@ export const blocks: Block[] = [
           },
           {
             kind: "video",
-            src: "/media/intro-4/strava.mov",
+            src: "/media/intro-4/strava-audio.mp4",
           },
         ],
       },

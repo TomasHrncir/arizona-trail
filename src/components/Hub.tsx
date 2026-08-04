@@ -67,21 +67,20 @@ export function Hub({
       >
         <svg
           viewBox="-70 -60 150 80"
-          width="160"
-          height="85"
+          className="w-[110px] sm:w-[140px] md:w-[160px] h-auto"
           style={{ overflow: "visible" }}
         >
           <Cow x={0} baseY={0} scale={1.3} />
         </svg>
       </button>
 
-      <div className="relative z-10 flex h-full flex-col justify-center items-center px-10 py-6">
-        <header className="text-center mb-[100px]">
+      <div className="relative z-10 flex h-full flex-col justify-center items-center px-4 sm:px-6 md:px-10 py-6">
+        <header className="text-center mb-8 md:mb-[100px]">
           <motion.h1
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.7 }}
-            className="font-display text-[#4A2418] text-6xl md:text-7xl lg:text-8xl tracking-wide uppercase leading-none"
+            className="font-display text-[#4A2418] text-4xl sm:text-5xl md:text-7xl lg:text-8xl tracking-wide uppercase leading-none"
             style={{ textShadow: "0 2px 0 rgba(255,240,215,0.55)" }}
           >
             Arizona Trail
@@ -90,14 +89,14 @@ export function Hub({
             initial={{ y: -10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="mt-2 text-lg md:text-xl italic text-[#5C3520]"
+            className="mt-2 text-sm sm:text-base md:text-xl italic text-[#5C3520]"
           >
             1 000 km od Mexika k Utahu za 26 dní
           </motion.p>
         </header>
 
         <main className="w-full flex justify-center">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-6xl w-full">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-5 max-w-6xl w-full">
             {blocks.map((b, i) => {
               const Icon = BLOCK_ICONS[b.id];
               return (
