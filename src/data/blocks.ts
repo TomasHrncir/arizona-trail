@@ -460,7 +460,7 @@ export const blocks: Block[] = [
         id: "vybaveni-3",
         layout: "text",
         title: "Velká trojka · 2,3 kg",
-        body: "Batoh Hyperlite Junction 55 (910 g), tarp Six Moon Designs Deschutes (632 g), spacák REI Magma 30 (737 g). Ultralight bez kompromisu.",
+        body: "Batoh Hyperlite Junction 55 (910 g), tarp Six Moon Designs Deschutes (632 g), spacák REI Magma 30 (737 g).",
       },
       {
         id: "vybaveni-4",
