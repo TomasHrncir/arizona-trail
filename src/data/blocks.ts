@@ -270,12 +270,6 @@ export const blocks: Block[] = [
         ],
       },
       {
-        id: "voda-5",
-        layout: "text",
-        title: "Divoké zdroje",
-        body: "Kravské napajedla, potoky, stojaté kaluže. Barva jako silný čaj, ale filtruje se to.",
-      },
-      {
         id: "voda-6",
         layout: "text",
         title: "Filtrování",
