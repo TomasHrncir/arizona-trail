@@ -1,7 +1,4 @@
-import type { ComponentType, SVGProps } from "react";
 import type { Slide as SlideType } from "../data/blocks";
-
-type IconComp = ComponentType<SVGProps<SVGSVGElement>>;
 
 /**
  * Presentation slide.
@@ -11,18 +8,12 @@ type IconComp = ComponentType<SVGProps<SVGSVGElement>>;
  *  - Rye for display, Fraunces for body
  *  - Consistent max-width, centered
  */
-export function Slide({
-  slide,
-  blockIcon,
-}: {
-  slide: SlideType;
-  blockIcon?: IconComp;
-}) {
+export function Slide({ slide }: { slide: SlideType }) {
   switch (slide.layout) {
     case "title":
-      return <TitleSlide slide={slide} blockIcon={blockIcon} />;
+      return <TitleSlide slide={slide} />;
     case "text":
-      return <TextSlide slide={slide} blockIcon={blockIcon} />;
+      return <TextSlide slide={slide} />;
     case "text-image":
       return <TextImageSlide slide={slide} />;
     case "image":
@@ -32,9 +23,9 @@ export function Slide({
     case "quote":
       return <QuoteSlide slide={slide} />;
     case "stats":
-      return <StatsSlide slide={slide} blockIcon={blockIcon} />;
+      return <StatsSlide slide={slide} />;
     default:
-      return <TextSlide slide={slide} blockIcon={blockIcon} />;
+      return <TextSlide slide={slide} />;
   }
 }
 
@@ -56,34 +47,12 @@ function Stage({
   );
 }
 
-/** Big gold block-icon rendered above the title on every slide that has one. */
-function BlockBadge({ Icon }: { Icon: IconComp }) {
-  return (
-    <div
-      className="mb-6 md:mb-8 h-20 w-20 md:h-24 md:w-24 mx-auto text-az-gold"
-      style={{
-        filter:
-          "drop-shadow(0 2px 0 rgba(0,0,0,0.5)) drop-shadow(0 6px 16px rgba(0,0,0,0.35))",
-      }}
-    >
-      <Icon />
-    </div>
-  );
-}
-
 /* ------------------------------- variants ------------------------------ */
 
-function TitleSlide({
-  slide,
-  blockIcon: Icon,
-}: {
-  slide: SlideType;
-  blockIcon?: IconComp;
-}) {
+function TitleSlide({ slide }: { slide: SlideType }) {
   return (
     <Stage className="text-center">
       <div className="flex flex-col items-center">
-        {Icon && <BlockBadge Icon={Icon} />}
         <h1
           className="font-display text-white text-6xl md:text-8xl leading-[0.95] tracking-wide uppercase"
           style={{
@@ -104,17 +73,10 @@ function TitleSlide({
   );
 }
 
-function TextSlide({
-  slide,
-  blockIcon: Icon,
-}: {
-  slide: SlideType;
-  blockIcon?: IconComp;
-}) {
+function TextSlide({ slide }: { slide: SlideType }) {
   return (
     <Stage>
       <div className="flex flex-col items-center text-center">
-        {Icon && <BlockBadge Icon={Icon} />}
         {slide.title && (
           <h2
             className="font-display text-white text-5xl md:text-6xl leading-tight uppercase"
@@ -255,17 +217,10 @@ function QuoteSlide({ slide }: { slide: SlideType }) {
   );
 }
 
-function StatsSlide({
-  slide,
-  blockIcon: Icon,
-}: {
-  slide: SlideType;
-  blockIcon?: IconComp;
-}) {
+function StatsSlide({ slide }: { slide: SlideType }) {
   return (
     <Stage className="text-center">
       <div className="flex flex-col items-center">
-        {Icon && <BlockBadge Icon={Icon} />}
         {slide.title && (
           <h2
             className="font-display text-white text-5xl md:text-6xl mb-12 uppercase"

@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import type { Block } from "../data/blocks";
 import { Slide } from "./Slide";
 import { DesertScene } from "./DesertScene";
-import { BLOCK_ICONS } from "./BlockIcons";
 
 const accentBg: Record<Block["accent"], string> = {
   red: "from-az-red/90 via-az-plum to-az-night",
@@ -90,7 +89,7 @@ export function BlockView({
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="h-full w-full"
           >
-            <Slide slide={slide} blockIcon={BLOCK_ICONS[block.id]} />
+            <Slide slide={slide} />
           </motion.div>
         </AnimatePresence>
       </div>
