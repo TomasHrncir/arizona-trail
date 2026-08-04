@@ -406,16 +406,19 @@ export const blocks: Block[] = [
         body: "Místní dobrovolník pomáhající thruhikerům. Nechávají vodu, vaří večeře, ubytují. Součást identity dálkových stezek v USA.",
       },
       {
-        id: "lide-3",
-        layout: "text",
-        title: "Kultura",
-        body: "Bez očekávání odplaty. Štědrost jako součást komunity. U nás nic podobného neexistuje.",
-      },
-      {
         id: "lide-4",
         layout: "text",
         title: "Trail Angels",
         body: "Jeff s manželkou\nMJ v Superioru\nWilliam v Kanab",
+        media: [
+          {
+            kind: "image",
+            src: "/media/lide-4/1.jpeg",
+            alt: "MJ před fialovým domem v Superioru",
+          },
+          { kind: "video", src: "/media/lide-4/2.mov" },
+          { kind: "video", src: "/media/lide-4/3.mov" },
+        ],
       },
       {
         id: "lide-5",
