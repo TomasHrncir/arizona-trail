@@ -62,7 +62,7 @@ export const blocks: Block[] = [
         id: "intro-3",
         layout: "text",
         title: "Co je thruhiking?",
-        body: "Jednorázový přechod celé dálkové stezky vcelku, ne po etapách. Životní styl na měsíc: pohyb × tempo × soběstačnost.",
+        body: "Thruhiking je pěší putování na dlouhé trati (obvykle stovky až tisíce kilometrů), kdy člověk projde celou trasu vytyčené dálkové stezky v jednom nepřerušeném tahu, obvykle během jedné sezóny.",
       },
       {
         id: "intro-4",
