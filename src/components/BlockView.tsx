@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import type { Block } from "../data/blocks";
 import { Slide } from "./Slide";
 import { DesertScene } from "./DesertScene";
+import { BlockAnimation } from "./BlockAnimation";
 
 const accentBg: Record<Block["accent"], string> = {
   red: "from-az-red/90 via-az-plum to-az-night",
@@ -60,6 +61,9 @@ export function BlockView({
       <div className="absolute inset-x-0 bottom-0 h-1/3 opacity-40 pointer-events-none">
         <DesertScene className="w-full h-full" />
       </div>
+
+      {/* Themed looping animation for this block */}
+      <BlockAnimation blockId={block.id} />
 
       {/* Top bar */}
       <div className="relative z-20 flex items-center justify-between px-6 pt-5">
