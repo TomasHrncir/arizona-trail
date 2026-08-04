@@ -172,6 +172,12 @@ export const blocks: Block[] = [
         title: "Rutina",
         body:
           "5:30 — vstávání\n6:30 — odchod\n11:30 — oběd\n19:00–20:00 — konec chození\n20:30 — večeře\n21:30 — spánek\n22:00 — hikers midnight",
+        media: [
+          {
+            kind: "instagram",
+            src: "https://www.instagram.com/tomsarunner/reel/DYnFn9tinVv/",
+          },
+        ],
       },
       {
         id: "den-6",
