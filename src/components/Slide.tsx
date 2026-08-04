@@ -43,10 +43,12 @@ function Stage({
   className?: string;
 }) {
   return (
-    <div
-      className={`h-full w-full flex items-center justify-center px-12 md:px-16 py-8 ${className}`}
-    >
-      <div className="w-full max-w-6xl">{children}</div>
+    <div className="h-full w-full overflow-y-auto">
+      <div
+        className={`min-h-full w-full flex items-center justify-center px-12 md:px-16 py-8 ${className}`}
+      >
+        <div className="w-full max-w-6xl">{children}</div>
+      </div>
     </div>
   );
 }

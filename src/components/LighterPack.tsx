@@ -27,7 +27,7 @@ export function LighterPack({ id }: { id: string }) {
 
   return (
     <div className="w-full mt-4 rounded-2xl bg-white/95 text-[#1a1a1a] shadow-2xl ring-1 ring-white/20 overflow-hidden">
-      <div className="max-h-[60vh] overflow-auto p-4 md:p-6">
+      <div className="p-4 md:p-6">
         <div id={id} ref={containerRef} />
         {failed && (
           <a
