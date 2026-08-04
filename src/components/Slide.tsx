@@ -201,9 +201,31 @@ function MediaGrid({
   }
 
   // 4 items — clean 2×2 grid
+  if (items.length === 4) {
+    return (
+      <div className="grid grid-cols-2 gap-4 md:gap-5">
+        {items.map((it, i) => (
+          <MediaTile key={i} item={it} onOpen={onOpen} />
+        ))}
+      </div>
+    );
+  }
+
+  // 5–6 items — 3 columns
+  if (items.length <= 6) {
+    return (
+      <div className="grid grid-cols-3 gap-3 md:gap-4">
+        {items.map((it, i) => (
+          <MediaTile key={i} item={it} onOpen={onOpen} />
+        ))}
+      </div>
+    );
+  }
+
+  // 7+ items — 3 columns, more compact gaps
   return (
-    <div className="grid grid-cols-2 gap-4 md:gap-5">
-      {items.slice(0, 4).map((it, i) => (
+    <div className="grid grid-cols-3 gap-3">
+      {items.map((it, i) => (
         <MediaTile key={i} item={it} onOpen={onOpen} />
       ))}
     </div>
