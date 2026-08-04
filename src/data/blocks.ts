@@ -224,14 +224,20 @@ export const blocks: Block[] = [
         title: "Arizona a voda",
         body:
           "Nejsuchší stát USA. V jižní části v květnu naprší cca nic. Voda určuje, kam a jak daleko dojdeš.\n\npaní z Kearny: „No nám asi nějak v červnu dojde voda.“",
+        media: [
+          { kind: "video", src: "/media/voda-2/1.mov" },
+          { kind: "video", src: "/media/voda-2/2.mov" },
+          { kind: "video", src: "/media/voda-2/3.mov" },
+          { kind: "video", src: "/media/voda-2/4.mov" },
+        ],
       },
       {
         id: "voda-3",
         layout: "stats",
         title: "V číslech",
         stats: [
-          { value: "5–7 L", label: "denně" },
-          { value: "40 km", label: "max mezi zdroji" },
+          { value: "6–16 L", label: "denně" },
+          { value: "50 km", label: "max mezi zdroji" },
           { value: "+1 kg = +1 L", label: "co táhnu navíc" },
         ],
       },
