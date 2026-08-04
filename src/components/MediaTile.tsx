@@ -3,14 +3,15 @@ import type { MediaItem } from "../data/blocks";
 /**
  * One slot in the media grid next to a text slide.
  * When `item` is undefined a dashed placeholder is drawn.
- * Images are clickable — parent slide opens them in a lightbox.
+ * Both images and videos are clickable — parent opens them in a lightbox.
+ * Videos on the tile show a static first-frame preview (muted, no autoplay).
  */
 export function MediaTile({
   item,
-  onOpenImage,
+  onOpen,
 }: {
   item?: MediaItem;
-  onOpenImage?: (src: string, alt?: string) => void;
+  onOpen?: (src: string) => void;
 }) {
   if (!item) {
     return (
@@ -32,7 +33,7 @@ export function MediaTile({
     return (
       <button
         type="button"
-        onClick={() => onOpenImage?.(item.src, item.alt)}
+        onClick={() => onOpen?.(item.src)}
         aria-label={item.alt ?? "Zvětšit obrázek"}
         className="group relative rounded-2xl overflow-hidden ring-1 ring-white/20 shadow-xl bg-black/30 aspect-[4/3] cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-az-gold"
       >
@@ -53,14 +54,28 @@ export function MediaTile({
     );
   }
 
+  // Video tile: static preview frame + big play overlay, click opens lightbox
   return (
-    <div className="rounded-2xl overflow-hidden ring-1 ring-white/20 shadow-xl bg-black aspect-[4/3] relative">
+    <button
+      type="button"
+      onClick={() => onOpen?.(item.src)}
+      aria-label="Přehrát video"
+      className="group relative rounded-2xl overflow-hidden ring-1 ring-white/20 shadow-xl bg-black aspect-[4/3] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-az-gold"
+    >
       <video
         src={item.src}
-        controls
+        muted
         playsInline
-        className="absolute inset-0 h-full w-full object-cover"
+        preload="metadata"
+        className="absolute inset-0 h-full w-full object-cover pointer-events-none"
       />
-    </div>
+      <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/45 transition-colors">
+        <div className="h-16 w-16 rounded-full bg-white/25 group-hover:bg-white/40 backdrop-blur flex items-center justify-center ring-2 ring-white/50">
+          <svg viewBox="0 0 24 24" className="h-7 w-7 text-white translate-x-[2px]">
+            <path d="M8 5v14l11-7z" fill="currentColor" />
+          </svg>
+        </div>
+      </div>
+    </button>
   );
 }

@@ -1,29 +1,32 @@
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-export type LightboxImage = { src: string; alt?: string };
+export type LightboxItem =
+  | { kind: "image"; src: string; alt?: string }
+  | { kind: "video"; src: string; alt?: string };
 
 /**
- * Full-screen image overlay with left/right navigation.
+ * Full-screen media overlay with left/right navigation.
  * `index === null` means closed.
  * Keyboard: Esc closes, ← prev, → next.
- * Click on backdrop closes; click on image is swallowed.
+ * Click on backdrop closes; click on media is swallowed.
+ * Videos auto-play with sound on open; navigating away pauses them.
  */
 export function Lightbox({
-  images,
+  items,
   index,
   onClose,
   onChange,
 }: {
-  images: LightboxImage[];
+  items: LightboxItem[];
   index: number | null;
   onClose: () => void;
   onChange: (index: number) => void;
 }) {
-  const isOpen = index !== null && index >= 0 && index < images.length;
-  const current = isOpen ? images[index] : null;
+  const isOpen = index !== null && index >= 0 && index < items.length;
+  const current = isOpen ? items[index] : null;
   const hasPrev = isOpen && index > 0;
-  const hasNext = isOpen && index < images.length - 1;
+  const hasNext = isOpen && index < items.length - 1;
 
   useEffect(() => {
     if (!isOpen) return;
@@ -56,7 +59,6 @@ export function Lightbox({
           className="fixed inset-0 z-[100] bg-black/92 backdrop-blur-md flex items-center justify-center cursor-zoom-out"
           onClick={onClose}
         >
-          {/* Prev arrow */}
           {hasPrev && (
             <button
               type="button"
@@ -64,27 +66,42 @@ export function Lightbox({
                 e.stopPropagation();
                 onChange(index - 1);
               }}
-              aria-label="Předchozí obrázek (←)"
+              aria-label="Předchozí (←)"
               className="fixed left-4 md:left-8 top-1/2 -translate-y-1/2 h-14 w-14 rounded-full bg-white/15 hover:bg-white/25 text-white ring-1 ring-white/30 backdrop-blur flex items-center justify-center text-3xl leading-none z-[110]"
             >
               ←
             </button>
           )}
 
-          {/* Image */}
-          <motion.img
-            key={current.src}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            src={current.src}
-            alt={current.alt ?? ""}
-            className="max-h-[92vh] max-w-[88vw] object-contain rounded-xl shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          />
+          {current.kind === "image" ? (
+            <motion.img
+              key={current.src}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              src={current.src}
+              alt={current.alt ?? ""}
+              className="max-h-[92vh] max-w-[88vw] object-contain rounded-xl shadow-2xl cursor-default"
+              onClick={(e) => e.stopPropagation()}
+            />
+          ) : (
+            <motion.video
+              key={current.src}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              src={current.src}
+              autoPlay
+              controls
+              playsInline
+              preload="auto"
+              className="max-h-[92vh] max-w-[88vw] object-contain rounded-xl shadow-2xl bg-black cursor-default"
+              onClick={(e) => e.stopPropagation()}
+            />
+          )}
 
-          {/* Next arrow */}
           {hasNext && (
             <button
               type="button"
@@ -92,21 +109,19 @@ export function Lightbox({
                 e.stopPropagation();
                 onChange(index + 1);
               }}
-              aria-label="Další obrázek (→)"
+              aria-label="Další (→)"
               className="fixed right-4 md:right-8 top-1/2 -translate-y-1/2 h-14 w-14 rounded-full bg-white/15 hover:bg-white/25 text-white ring-1 ring-white/30 backdrop-blur flex items-center justify-center text-3xl leading-none z-[110]"
             >
               →
             </button>
           )}
 
-          {/* Counter */}
-          {images.length > 1 && index !== null && (
+          {items.length > 1 && index !== null && (
             <div className="fixed top-5 left-1/2 -translate-x-1/2 font-mono text-white/85 text-sm bg-black/40 px-3 py-1 rounded-full ring-1 ring-white/20 backdrop-blur">
-              {index + 1} / {images.length}
+              {index + 1} / {items.length}
             </div>
           )}
 
-          {/* Close */}
           <button
             type="button"
             onClick={(e) => {

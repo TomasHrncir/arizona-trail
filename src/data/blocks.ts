@@ -119,6 +119,22 @@ export const blocks: Block[] = [
           url: "https://fastestknowntime.com/route/arizona-trail-az",
           label: "fastestknowntime.com",
         },
+        media: [
+          {
+            kind: "image",
+            src: "/media/intro-4/1.jpeg",
+            alt: "Start a cíl AZT — split fotka",
+          },
+          {
+            kind: "image",
+            src: "/media/intro-4/2.jpeg",
+            alt: "AZT ze dřeva na cestě",
+          },
+          {
+            kind: "video",
+            src: "/media/intro-4/strava.mov",
+          },
+        ],
       },
     ],
   },
@@ -150,20 +166,9 @@ export const blocks: Block[] = [
       {
         id: "den-3",
         layout: "text",
-        title: "5:30 vstávání",
-        body: "Před sluncem. Sbaleno za 20 minut. První kilometry, než začne pálit.",
-      },
-      {
-        id: "den-4",
-        layout: "text",
-        title: "Poledne",
-        body: "Ve stínu skály nebo saguara. Vaří se boty. Spím, jím, doplňuju vodu.",
-      },
-      {
-        id: "den-5",
-        layout: "text",
-        title: "Večer",
-        body: "Když slunce padá, jdu dál. Nejhezčí hodiny na stezce. Kemp až po tmě.",
+        title: "Rutina",
+        body:
+          "5:30 — vstávání\n6:30 — odchod\n11:30 — oběd\n19:00–20:00 — konec chození\n20:30 — večeře\n21:30 — spánek\n22:00 — hikers midnight",
       },
       {
         id: "den-6",

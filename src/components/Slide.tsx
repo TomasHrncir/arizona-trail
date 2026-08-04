@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import type { MediaItem, Slide as SlideType } from "../data/blocks";
 import { MediaTile } from "./MediaTile";
-import { Lightbox, type LightboxImage } from "./Lightbox";
+import { Lightbox, type LightboxItem } from "./Lightbox";
 
 /**
  * Presentation slide.
@@ -78,17 +78,20 @@ function TitleSlide({ slide }: { slide: SlideType }) {
 
 function TextSlide({ slide }: { slide: SlideType }) {
   const media = slide.media ?? [];
-  const images: LightboxImage[] = useMemo(
+  // All media (images + videos) are shown in the lightbox in slide order.
+  const lightboxItems: LightboxItem[] = useMemo(
     () =>
-      media
-        .filter((m): m is Extract<MediaItem, { kind: "image" }> => m.kind === "image")
-        .map((m) => ({ src: m.src, alt: m.alt })),
+      media.map((m) =>
+        m.kind === "image"
+          ? { kind: "image" as const, src: m.src, alt: m.alt }
+          : { kind: "video" as const, src: m.src },
+      ),
     [media],
   );
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
-  const openImage = (src: string) => {
-    const i = images.findIndex((im) => im.src === src);
+  const openMedia = (src: string) => {
+    const i = lightboxItems.findIndex((it) => it.src === src);
     setOpenIdx(i >= 0 ? i : null);
   };
 
@@ -110,7 +113,9 @@ function TextSlide({ slide }: { slide: SlideType }) {
           {slide.body && (
             <div className="mt-6 font-body text-white text-lg md:text-xl leading-relaxed space-y-4">
               {slide.body.split(/\n{2,}/).map((para, i) => (
-                <p key={i}>{para}</p>
+                <p key={i} className="whitespace-pre-line">
+                  {para}
+                </p>
               ))}
             </div>
           )}
@@ -127,11 +132,11 @@ function TextSlide({ slide }: { slide: SlideType }) {
           )}
         </div>
 
-        <MediaGrid items={media} onOpenImage={openImage} />
+        <MediaGrid items={media} onOpen={openMedia} />
       </div>
 
       <Lightbox
-        images={images}
+        items={lightboxItems}
         index={openIdx}
         onClose={() => setOpenIdx(null)}
         onChange={setOpenIdx}
@@ -142,10 +147,10 @@ function TextSlide({ slide }: { slide: SlideType }) {
 
 function MediaGrid({
   items,
-  onOpenImage,
+  onOpen,
 }: {
   items: MediaItem[];
-  onOpenImage: (src: string, alt?: string) => void;
+  onOpen: (src: string) => void;
 }) {
   const slots: (MediaItem | undefined)[] = [
     items[0],
@@ -156,7 +161,7 @@ function MediaGrid({
   return (
     <div className="grid grid-cols-2 gap-4 md:gap-5">
       {slots.map((it, i) => (
-        <MediaTile key={i} item={it} onOpenImage={onOpenImage} />
+        <MediaTile key={i} item={it} onOpen={onOpen} />
       ))}
     </div>
   );
