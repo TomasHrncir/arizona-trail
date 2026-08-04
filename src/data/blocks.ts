@@ -318,7 +318,13 @@ export const blocks: Block[] = [
         id: "strava-7",
         layout: "text",
         title: "Resupply",
-        body: "Každých 5–7 dní ve městě. Walmart, benzínka, nebo poste restante krabice, kterou jsem si sám poslal dopředu.",
+        body: "Nejdelší stretch 180 km nebo 5 dní bez jídla, na trailu v deficitu a dojídání ve městech.",
+        media: [
+          {
+            kind: "instagram",
+            src: "https://www.instagram.com/p/DY8quY8N0vn/",
+          },
+        ],
       },
     ],
   },
