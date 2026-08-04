@@ -39,14 +39,28 @@ export function Hub({
       {/* Dust particles floating up */}
       <DustMotes />
 
-      {/* Desert horizon (Monument Valley mesas + cacti + agaves).
-          Cow inside is clickable — opens IG reel in the lightbox. */}
-      <div className="absolute inset-x-0 bottom-0 h-[55%] z-20">
-        <DesertScene
-          className="w-full h-full"
-          onCowClick={() => setCowOpen(true)}
-        />
+      {/* Desert horizon (Monument Valley mesas + cacti + agaves) — decorative,
+          non-interactive, sits behind the tile grid. */}
+      <div className="absolute inset-x-0 bottom-0 h-[55%] pointer-events-none">
+        <DesertScene className="w-full h-full" />
       </div>
+
+      {/* Invisible hitbox positioned over the cow — foreground so it beats
+          the tile grid to clicks. */}
+      <button
+        type="button"
+        onClick={() => setCowOpen(true)}
+        aria-label="Přehrát video s krávou"
+        className="absolute z-30 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-az-gold cursor-pointer"
+        style={{
+          left: "54%",
+          bottom: "2vh",
+          transform: "translateX(-50%)",
+          width: "120px",
+          height: "70px",
+          background: "transparent",
+        }}
+      />
 
       {/* Tumbleweeds rolling */}
       <Tumbleweed duration={16} delay={3} size={72} yOffsetPct={87} />
