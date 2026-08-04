@@ -39,8 +39,8 @@ export function Hub({
       <Tumbleweed duration={16} delay={3} size={72} yOffsetPct={87} />
       <Tumbleweed duration={22} delay={12} size={48} yOffsetPct={82} />
 
-      <div className="relative z-10 flex h-full flex-col px-10 py-6">
-        <header className="text-center pt-2 pb-1">
+      <div className="relative z-10 flex h-full flex-col justify-center items-center px-10 py-6">
+        <header className="text-center mb-4">
           <motion.h1
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -60,7 +60,7 @@ export function Hub({
           </motion.p>
         </header>
 
-        <main className="flex-1 flex items-center justify-center">
+        <main className="w-full flex justify-center">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-6xl w-full">
             {blocks.map((b, i) => {
               const Icon = BLOCK_ICONS[b.id];
@@ -86,7 +86,6 @@ export function Hub({
             })}
           </div>
         </main>
-
       </div>
     </div>
   );
