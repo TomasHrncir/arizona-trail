@@ -365,6 +365,21 @@ export const blocks: Block[] = [
           { kind: "video", src: "/media/zvirata-2/7.mov" },
           { kind: "video", src: "/media/zvirata-2/8.mov" },
           { kind: "video", src: "/media/zvirata-2/9.mov" },
+          { kind: "video", src: "/media/zvirata-2/10.mov" },
+          { kind: "video", src: "/media/zvirata-2/11.mov" },
+        ],
+      },
+      {
+        id: "zvirata-3",
+        layout: "text",
+        title: "Neměl jsem takové štěstí",
+        body: "",
+        media: [
+          {
+            kind: "image",
+            src: "/media/zvirata-3/1.png",
+            alt: "FarOut app — komentáře o stavu vody na trailu",
+          },
         ],
       },
     ],
