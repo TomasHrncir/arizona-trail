@@ -274,6 +274,12 @@ export const blocks: Block[] = [
         layout: "text",
         title: "Filtrování",
         body: "Sawyer Squeeze 85 g, 1 L za minutu. Filtr vydrží celý trip, když se čistí stříkačkou.",
+        media: [
+          {
+            kind: "instagram",
+            src: "https://www.instagram.com/p/DYEBbFcCEXI/",
+          },
+        ],
       },
     ],
   },
