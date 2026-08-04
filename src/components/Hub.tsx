@@ -40,7 +40,7 @@ export function Hub({
       <Tumbleweed duration={22} delay={12} size={48} yOffsetPct={82} />
 
       <div className="relative z-10 flex h-full flex-col justify-center items-center px-10 py-6">
-        <header className="text-center mb-4">
+        <header className="text-center mb-[100px]">
           <motion.h1
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
