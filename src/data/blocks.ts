@@ -521,14 +521,8 @@ export const blocks: Block[] = [
       {
         id: "prihody-5",
         layout: "text",
-        title: "Puchýře",
-        body: "Přes všechen Squirrel's Nut Butter. Kdy, jak, co pomohlo.",
-      },
-      {
-        id: "prihody-6",
-        layout: "text",
-        title: "Zarostlá tříska",
-        body: "Ten okamžik, kdy „tohle nechci ani vidět“. Řešení v terénu.",
+        title: "Tříska",
+        body: "3 dny v noze a nechtělo se jí ven.",
       },
     ],
   },
