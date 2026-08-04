@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Cow } from "./Cow";
 
 /**
  * Mid-century minimalist desert.
@@ -13,13 +12,7 @@ const CACTUS_LITE = "#547A4E";
 const CACTUS_SPINE = "rgba(20, 40, 22, 0.45)";
 const SHRUB_FILL = "#3E5A45";
 
-export function DesertScene({
-  className = "",
-  onCowClick,
-}: {
-  className?: string;
-  onCowClick?: () => void;
-}) {
+export function DesertScene({ className = "" }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 1600 620"
