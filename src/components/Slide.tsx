@@ -178,11 +178,14 @@ function TextSlide({ slide }: { slide: SlideType }) {
           )}
         </div>
 
-        <div className="flex flex-col gap-4">
-          <MediaGrid items={media} onOpen={openMedia} />
-          {slide.lighterpack && <LighterPack id={slide.lighterpack} />}
-        </div>
+        <MediaGrid items={media} onOpen={openMedia} />
       </div>
+
+      {slide.lighterpack && (
+        <div className="mt-8 w-full">
+          <LighterPack id={slide.lighterpack} />
+        </div>
+      )}
 
       <Lightbox
         items={lightboxItems}
