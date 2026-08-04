@@ -112,7 +112,12 @@ export function Lightbox({
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               className="rounded-xl overflow-hidden shadow-2xl bg-white cursor-default"
-              style={{ width: "min(420px, 88vw)", height: "min(760px, 92vh)" }}
+              style={{
+                // Portrait aspect (Reel video + IG chrome). Fills viewport height,
+                // falls back to width cap when the viewport is very narrow.
+                aspectRatio: "420 / 760",
+                height: "min(96vh, calc(88vw * 760 / 420))",
+              }}
               onClick={(e) => e.stopPropagation()}
             >
               <iframe
