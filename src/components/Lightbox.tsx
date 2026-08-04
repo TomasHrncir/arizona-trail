@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { toInstagramEmbedUrl } from "./instagram";
 
 export type LightboxItem =
   | { kind: "image"; src: string; alt?: string }
-  | { kind: "video"; src: string; alt?: string };
+  | { kind: "video"; src: string; alt?: string }
+  | { kind: "instagram"; src: string };
 
 /**
  * Full-screen media overlay with left/right navigation.
@@ -73,7 +75,7 @@ export function Lightbox({
             </button>
           )}
 
-          {current.kind === "image" ? (
+          {current.kind === "image" && (
             <motion.img
               key={current.src}
               initial={{ opacity: 0 }}
@@ -85,7 +87,8 @@ export function Lightbox({
               className="max-h-[92vh] max-w-[88vw] object-contain rounded-xl shadow-2xl cursor-default"
               onClick={(e) => e.stopPropagation()}
             />
-          ) : (
+          )}
+          {current.kind === "video" && (
             <motion.video
               key={current.src}
               initial={{ opacity: 0 }}
@@ -100,6 +103,29 @@ export function Lightbox({
               className="max-h-[92vh] max-w-[88vw] object-contain rounded-xl shadow-2xl bg-black cursor-default"
               onClick={(e) => e.stopPropagation()}
             />
+          )}
+          {current.kind === "instagram" && (
+            <motion.div
+              key={current.src}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="rounded-xl overflow-hidden shadow-2xl bg-white cursor-default"
+              style={{ width: "min(420px, 88vw)", height: "min(760px, 92vh)" }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <iframe
+                src={toInstagramEmbedUrl(current.src)}
+                title="Instagram Reel"
+                className="w-full h-full border-0"
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
+                allowFullScreen
+                loading="eager"
+                referrerPolicy="no-referrer-when-downgrade"
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+              />
+            </motion.div>
           )}
 
           {hasNext && (

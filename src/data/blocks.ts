@@ -16,7 +16,9 @@ export type Stat = { value: string; label: string };
  */
 export type MediaItem =
   | { kind: "image"; src: string; alt?: string; caption?: string }
-  | { kind: "video"; src: string; caption?: string };
+  | { kind: "video"; src: string; caption?: string }
+  /** Instagram Reel — `src` is the reel permalink, e.g. https://www.instagram.com/xxx/reel/CODE/. */
+  | { kind: "instagram"; src: string };
 
 export type Slide = {
   id: string;
@@ -134,6 +136,10 @@ export const blocks: Block[] = [
             kind: "video",
             src: "/media/intro-4/strava.mov",
           },
+          {
+            kind: "instagram",
+            src: "https://www.instagram.com/tomsarunner/reel/DYnFn9tinVv/",
+          },
         ],
       },
     ],
@@ -174,7 +180,7 @@ export const blocks: Block[] = [
         id: "den-6",
         layout: "text",
         title: "Přenos do závodu",
-        body: "Objem, který nedá žádný trénink. Mentál na dlouhé úseky = maraton po 30. km. Perfektní příprava na Beskydskou sedmičku — dlouhé hodiny pohybu, únava, regenerace za pochodu.",
+        body: "Objem, který nelze jenom běháním nasbírat. Mentální odolnost a vypořádávání se s každodenními bolístkami. Perfektní příprava na ultra — dlouhé hodiny pohybu, únava, regenerace za pochodu.",
       },
     ],
   },

@@ -3,8 +3,7 @@ import type { MediaItem } from "../data/blocks";
 /**
  * One slot in the media grid next to a text slide.
  * When `item` is undefined a dashed placeholder is drawn.
- * Both images and videos are clickable — parent opens them in a lightbox.
- * Videos on the tile show a static first-frame preview (muted, no autoplay).
+ * All media kinds are clickable and open in the lightbox.
  */
 export function MediaTile({
   item,
@@ -54,26 +53,66 @@ export function MediaTile({
     );
   }
 
-  // Video tile: static preview frame + big play overlay, click opens lightbox
+  if (item.kind === "video") {
+    return (
+      <button
+        type="button"
+        onClick={() => onOpen?.(item.src)}
+        aria-label="Přehrát video"
+        className="group relative rounded-2xl overflow-hidden ring-1 ring-white/20 shadow-xl bg-black aspect-[4/3] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-az-gold"
+      >
+        <video
+          src={item.src}
+          muted
+          playsInline
+          preload="metadata"
+          className="absolute inset-0 h-full w-full object-cover pointer-events-none"
+        />
+        <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/45 transition-colors">
+          <div className="h-16 w-16 rounded-full bg-white/25 group-hover:bg-white/40 backdrop-blur flex items-center justify-center ring-2 ring-white/50">
+            <svg viewBox="0 0 24 24" className="h-7 w-7 text-white translate-x-[2px]">
+              <path d="M8 5v14l11-7z" fill="currentColor" />
+            </svg>
+          </div>
+        </div>
+      </button>
+    );
+  }
+
+  // Instagram Reel — gradient tile with IG icon + play, opens iframe in lightbox
   return (
     <button
       type="button"
       onClick={() => onOpen?.(item.src)}
-      aria-label="Přehrát video"
-      className="group relative rounded-2xl overflow-hidden ring-1 ring-white/20 shadow-xl bg-black aspect-[4/3] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-az-gold"
+      aria-label="Přehrát Instagram Reel"
+      className="group relative rounded-2xl overflow-hidden ring-1 ring-white/20 shadow-xl aspect-[4/3] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-az-gold"
+      style={{
+        background:
+          "conic-gradient(from 45deg at 30% 110%, #FFD35F 0deg, #FF6E44 70deg, #E1306C 150deg, #C13584 210deg, #833AB4 280deg, #5851DB 340deg, #FFD35F 360deg)",
+      }}
     >
-      <video
-        src={item.src}
-        muted
-        playsInline
-        preload="metadata"
-        className="absolute inset-0 h-full w-full object-cover pointer-events-none"
-      />
-      <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/45 transition-colors">
-        <div className="h-16 w-16 rounded-full bg-white/25 group-hover:bg-white/40 backdrop-blur flex items-center justify-center ring-2 ring-white/50">
-          <svg viewBox="0 0 24 24" className="h-7 w-7 text-white translate-x-[2px]">
+      <div className="absolute inset-0 bg-black/25 group-hover:bg-black/35 transition-colors flex flex-col items-center justify-center gap-3">
+        <svg viewBox="0 0 24 24" className="h-10 w-10 text-white drop-shadow-md">
+          <rect
+            x="3"
+            y="3"
+            width="18"
+            height="18"
+            rx="5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.7"
+          />
+          <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="1.7" />
+          <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
+        </svg>
+        <div className="h-12 w-12 rounded-full bg-white/35 group-hover:bg-white/55 backdrop-blur flex items-center justify-center ring-2 ring-white/60">
+          <svg viewBox="0 0 24 24" className="h-5 w-5 text-white translate-x-[2px]">
             <path d="M8 5v14l11-7z" fill="currentColor" />
           </svg>
+        </div>
+        <div className="font-stamp text-[10px] uppercase tracking-widest text-white/90">
+          Instagram Reel
         </div>
       </div>
     </button>

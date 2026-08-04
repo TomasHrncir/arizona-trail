@@ -81,11 +81,13 @@ function TextSlide({ slide }: { slide: SlideType }) {
   // All media (images + videos) are shown in the lightbox in slide order.
   const lightboxItems: LightboxItem[] = useMemo(
     () =>
-      media.map((m) =>
-        m.kind === "image"
-          ? { kind: "image" as const, src: m.src, alt: m.alt }
-          : { kind: "video" as const, src: m.src },
-      ),
+      media.map((m) => {
+        if (m.kind === "image")
+          return { kind: "image" as const, src: m.src, alt: m.alt };
+        if (m.kind === "video")
+          return { kind: "video" as const, src: m.src };
+        return { kind: "instagram" as const, src: m.src };
+      }),
     [media],
   );
   const [openIdx, setOpenIdx] = useState<number | null>(null);
@@ -152,15 +154,56 @@ function MediaGrid({
   items: MediaItem[];
   onOpen: (src: string) => void;
 }) {
-  const slots: (MediaItem | undefined)[] = [
-    items[0],
-    items[1],
-    items[2],
-    items[3],
-  ];
+  // No media specified → keep 4 placeholders (authoring hint).
+  if (items.length === 0) {
+    return (
+      <div className="grid grid-cols-2 gap-4 md:gap-5">
+        {[0, 1, 2, 3].map((i) => (
+          <MediaTile key={i} onOpen={onOpen} />
+        ))}
+      </div>
+    );
+  }
+
+  // 1 item — a single big tile
+  if (items.length === 1) {
+    return (
+      <div className="grid grid-cols-1">
+        <MediaTile item={items[0]} onOpen={onOpen} />
+      </div>
+    );
+  }
+
+  // 2 items — 2 columns
+  if (items.length === 2) {
+    return (
+      <div className="grid grid-cols-2 gap-4 md:gap-5">
+        {items.map((it, i) => (
+          <MediaTile key={i} item={it} onOpen={onOpen} />
+        ))}
+      </div>
+    );
+  }
+
+  // 3 items — one big on the left spanning both rows, two stacked on the right
+  if (items.length === 3) {
+    return (
+      <div className="grid grid-cols-2 grid-rows-2 gap-4 md:gap-5 [grid-auto-flow:row_dense]">
+        <div className="row-span-2 h-full">
+          <div className="h-full">
+            <MediaTile item={items[0]} onOpen={onOpen} />
+          </div>
+        </div>
+        <MediaTile item={items[1]} onOpen={onOpen} />
+        <MediaTile item={items[2]} onOpen={onOpen} />
+      </div>
+    );
+  }
+
+  // 4 items — clean 2×2 grid
   return (
     <div className="grid grid-cols-2 gap-4 md:gap-5">
-      {slots.map((it, i) => (
+      {items.slice(0, 4).map((it, i) => (
         <MediaTile key={i} item={it} onOpen={onOpen} />
       ))}
     </div>
