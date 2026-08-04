@@ -5,6 +5,7 @@ import { CortenSign } from "./CortenSign";
 import { BLOCK_ICONS } from "./BlockIcons";
 import { Tumbleweed } from "./Tumbleweed";
 import { DustMotes } from "./DustMotes";
+import { PosterSky } from "./PosterSky";
 
 export function Hub({
   blocks,
@@ -14,12 +15,23 @@ export function Hub({
   onOpen: (blockId: string) => void;
 }) {
   return (
-    <div className="relative h-full w-full overflow-hidden bg-sunset grain">
+    <div
+      className="relative h-full w-full overflow-hidden grain"
+      style={{
+        background:
+          "linear-gradient(180deg, #1A0F3D 0%, #3A144E 12%, #6B1B62 22%, #A62468 30%, #D63A63 38%, #F04E4E 45%, #F58C4E 52%, #FFCE3E 60%, #FFCE3E 100%)",
+      }}
+    >
+      {/* Sky with sun + stars + cloud bands */}
+      <div className="absolute inset-0 pointer-events-none">
+        <PosterSky className="w-full h-full" />
+      </div>
+
       {/* Dust particles floating up */}
       <DustMotes />
 
-      {/* Desert horizon */}
-      <div className="absolute inset-x-0 bottom-0 h-[40%] pointer-events-none">
+      {/* Desert horizon (Monument Valley mesas + cacti + agaves) */}
+      <div className="absolute inset-x-0 bottom-0 h-[55%] pointer-events-none">
         <DesertScene className="w-full h-full" />
       </div>
 
@@ -66,7 +78,6 @@ export function Hub({
                   <CortenSign
                     title={b.title}
                     subtitle={b.subtitle}
-                    footer={`${b.slides.length} slidů`}
                     icon={Icon ? <Icon /> : undefined}
                   />
                 </motion.button>
@@ -75,9 +86,6 @@ export function Hub({
           </div>
         </main>
 
-        <footer className="text-center text-white/70 text-sm pb-1 font-stamp uppercase tracking-widest">
-          Klikni na ceduli · šipky ← → mezi slidy · Esc zpět
-        </footer>
       </div>
     </div>
   );
