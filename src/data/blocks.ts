@@ -495,6 +495,12 @@ export const blocks: Block[] = [
         subtitle: "Co si pamatuju nejvíc",
       },
       {
+        id: "prihody-voda",
+        layout: "text",
+        title: "Jak mi došla voda",
+        body: "Musel jsem pít zkaženou vodu a byl jsem silně dehydratovaný.",
+      },
+      {
         id: "prihody-3",
         layout: "text",
         title: "Noc na dně Grand Canyonu",
