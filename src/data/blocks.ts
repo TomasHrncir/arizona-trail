@@ -136,10 +136,6 @@ export const blocks: Block[] = [
             kind: "video",
             src: "/media/intro-4/strava.mov",
           },
-          {
-            kind: "instagram",
-            src: "https://www.instagram.com/tomsarunner/reel/DYnFn9tinVv/",
-          },
         ],
       },
     ],
