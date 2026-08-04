@@ -499,6 +499,7 @@ export const blocks: Block[] = [
             src: "https://www.instagram.com/p/DYflzhwC83Y/",
           },
         ],
+        lighterpack: "7w9ymc",
       },
     ],
   },
