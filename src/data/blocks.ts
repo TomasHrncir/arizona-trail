@@ -505,6 +505,12 @@ export const blocks: Block[] = [
         layout: "text",
         title: "Noc na dně Grand Canyonu",
         body: "40 °C ve dne, 25 °C v noci u řeky Colorado. Zvuk vody místo ticha.",
+        media: [
+          {
+            kind: "instagram",
+            src: "https://www.instagram.com/p/DZRnFGaNWqu/",
+          },
+        ],
       },
       {
         id: "prihody-4",
