@@ -6,7 +6,8 @@ import { CortenSign } from "./CortenSign";
 import { BLOCK_ICONS } from "./BlockIcons";
 import { Tumbleweed } from "./Tumbleweed";
 import { DustMotes } from "./DustMotes";
-import { MutedDesert } from "./MutedDesert";
+import { DesertScene } from "./DesertScene";
+import { PosterSky } from "./PosterSky";
 import { Lightbox, type LightboxItem } from "./Lightbox";
 
 const COW_REEL: LightboxItem = {
@@ -26,15 +27,23 @@ export function Hub({
   return (
     <div
       className="relative h-full w-full overflow-hidden grain"
-      style={{ background: "#7A9A94" }}
+      style={{
+        background:
+          "linear-gradient(180deg, #B8CFC4 0%, #C4D6C9 45%, #D9C5A6 62%, #E4B98A 74%, #D9944A 100%)",
+      }}
     >
-      {/* Full-viewport hand-coded muted desert backdrop */}
+      {/* Sky with sun + clouds */}
       <div className="absolute inset-0 pointer-events-none">
-        <MutedDesert className="w-full h-full" />
+        <PosterSky className="w-full h-full" />
       </div>
 
       {/* Warm dust motes drifting up */}
       <DustMotes />
+
+      {/* Desert horizon (Monument Valley mesas + cacti + agaves) */}
+      <div className="absolute inset-x-0 bottom-0 h-[55%] pointer-events-none">
+        <DesertScene className="w-full h-full" />
+      </div>
 
       {/* Tumbleweeds rolling across */}
       <Tumbleweed duration={16} delay={3} size={72} yOffsetPct={87} />
