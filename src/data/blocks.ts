@@ -181,6 +181,28 @@ export const blocks: Block[] = [
         layout: "text",
         title: "Přenos do závodu",
         body: "Objem, který nelze jenom běháním nasbírat. Mentální odolnost a vypořádávání se s každodenními bolístkami. Perfektní příprava na ultra — dlouhé hodiny pohybu, únava, regenerace za pochodu.",
+        media: [
+          {
+            kind: "image",
+            src: "/media/den-6/1.jpeg",
+            alt: "Freedom Fuel — americká káva",
+          },
+          {
+            kind: "image",
+            src: "/media/den-6/2.jpeg",
+            alt: "Prošlapané trailové boty ve Flagstaffu",
+          },
+          {
+            kind: "image",
+            src: "/media/den-6/3.jpeg",
+            alt: "Zmožené nohy — kotník omotaný obvazem",
+          },
+          {
+            kind: "image",
+            src: "/media/den-6/4.jpeg",
+            alt: "Karimatka v pit toaletě",
+          },
+        ],
       },
     ],
   },
