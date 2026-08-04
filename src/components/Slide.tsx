@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import type { MediaItem, Slide as SlideType } from "../data/blocks";
 import { MediaTile } from "./MediaTile";
-import { Lightbox } from "./Lightbox";
+import { Lightbox, type LightboxImage } from "./Lightbox";
 
 /**
  * Presentation slide.
@@ -78,10 +78,19 @@ function TitleSlide({ slide }: { slide: SlideType }) {
 
 function TextSlide({ slide }: { slide: SlideType }) {
   const media = slide.media ?? [];
-  const [openSrc, setOpenSrc] = useState<{
-    src: string;
-    alt?: string;
-  } | null>(null);
+  const images: LightboxImage[] = useMemo(
+    () =>
+      media
+        .filter((m): m is Extract<MediaItem, { kind: "image" }> => m.kind === "image")
+        .map((m) => ({ src: m.src, alt: m.alt })),
+    [media],
+  );
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+
+  const openImage = (src: string) => {
+    const i = images.findIndex((im) => im.src === src);
+    setOpenIdx(i >= 0 ? i : null);
+  };
 
   return (
     <Stage>
@@ -105,16 +114,14 @@ function TextSlide({ slide }: { slide: SlideType }) {
           )}
         </div>
 
-        <MediaGrid
-          items={media}
-          onOpenImage={(src, alt) => setOpenSrc({ src, alt })}
-        />
+        <MediaGrid items={media} onOpenImage={openImage} />
       </div>
 
       <Lightbox
-        src={openSrc?.src ?? null}
-        alt={openSrc?.alt}
-        onClose={() => setOpenSrc(null)}
+        images={images}
+        index={openIdx}
+        onClose={() => setOpenIdx(null)}
+        onChange={setOpenIdx}
       />
     </Stage>
   );
@@ -282,6 +289,8 @@ function StatsSlide({ slide }: { slide: SlideType }) {
               className="w-full h-full border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
+              /* No allow-top-navigation → iframe cannot redirect the whole tab */
+              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
               allowFullScreen
             />
           </div>

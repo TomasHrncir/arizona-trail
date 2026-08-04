@@ -73,8 +73,10 @@ export const blocks: Block[] = [
           { value: "24 000 m", label: "nastoupáno" },
           { value: "26 dní", label: "na trailu" },
         ],
+        // OSM embed — mapy.com hlavní web neumí být framován.
+        // Až budeš mít z mapy.com „Sdílet → Vložit" iframe URL (frame.mapy.cz/s/...), přehoď sem.
         mapEmbed:
-          "https://mapy.com/cs/turisticka?source=osm&id=1080840971&ds=1&x=-111.6015793&y=33.5065270&z=8&embed=1",
+          "https://www.openstreetmap.org/export/embed.html?bbox=-113.5%2C31.2%2C-109.5%2C37.2&layer=cyclosm",
       },
       {
         id: "intro-3",
