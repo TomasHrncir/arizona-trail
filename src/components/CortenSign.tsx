@@ -149,9 +149,9 @@ export function CortenSign({
         <Rivet cx={378} cy={238} />
       </svg>
 
-      {/* HTML overlay: icon (top-left), title (centered), subtitle + footer (bottom) */}
+      {/* HTML overlay: icon (top-center), title (centered), subtitle + footer (bottom) */}
       <div className="absolute inset-0 flex flex-col p-4 pointer-events-none">
-        <div className="flex items-start justify-between h-8">
+        <div className="flex items-start justify-center h-9">
           {icon && (
             <div
               className="h-9 w-9 text-[#1A0803]"

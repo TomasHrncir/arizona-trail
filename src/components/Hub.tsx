@@ -41,9 +41,9 @@ export function Hub({
 
       {/* Desert horizon (Monument Valley mesas + cacti + agaves).
           Cow inside is clickable — opens IG reel in the lightbox. */}
-      <div className="absolute inset-x-0 bottom-0 h-[55%]">
+      <div className="absolute inset-x-0 bottom-0 h-[55%] z-20">
         <DesertScene
-          className="w-full h-full pointer-events-none"
+          className="w-full h-full"
           onCowClick={() => setCowOpen(true)}
         />
       </div>
