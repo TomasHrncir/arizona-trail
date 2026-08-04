@@ -7,33 +7,33 @@ Sem dej obrázky a videa z iPhonu.
 - `public/media/nazev-obrazku.jpg`
 - `public/media/video-kojoti.mp4`
 
-## Použití ve slidech
+## Přidání do slidu (nový 2×2 layout)
 
-V `src/data/blocks.ts` u slidu vyplň:
+Každý **text slide** má vpravo mřížku 2×2 — 4 sloty pro obrázky/videa.
+Bez `media` se nakreslí přerušované rámečky jako placeholder.
 
-```ts
-{
-  id: "voda-3",
-  layout: "text-image",
-  title: "Kravské napajedlo",
-  body: "Ano, opravdu se z toho pije...",
-  image: "/media/napajedlo.jpg",
-}
-```
-
-Pro video:
+Do slidu v `src/data/blocks.ts` přidej `media`:
 
 ```ts
 {
-  id: "prihody-4",
-  layout: "video",
-  title: "Bouřka",
-  video: "/media/bourka.mp4",
-  caption: "30 mm za hodinu",
+  id: "voda-5",
+  layout: "text",
+  title: "Divoké zdroje",
+  body: "Kravské napajedla, potoky, stojaté kaluže. Barva jak silný čaj, ale filtruje se to.",
+  media: [
+    { kind: "image", src: "/media/napajedlo.jpg", alt: "Kravské napajedlo", caption: "Papago Wash" },
+    { kind: "image", src: "/media/potok.jpg", caption: "Redington Creek" },
+    { kind: "video", src: "/media/filtrovani.mp4", caption: "Sawyer za práce" },
+    // 4. slot zůstane placeholder
+  ],
 }
 ```
+
+- `kind: "image"` → `src`, volitelně `alt` a `caption`
+- `kind: "video"` → `src`, volitelně `caption` (spustí se s ovladači)
+- Max 4 položky. Když jich dáš míň, zbytek jsou placeholdery.
 
 ## Formáty
 
-- Obrázky: JPG (max ~2 MB), WebP je ještě lepší
-- Videa: MP4 z iPhonu jsou hotová, jen je sem přesuň (klidně 100+ MB je OK pro lokální prezentaci)
+- **Obrázky:** JPG (max ~2 MB), WebP je ještě lepší.
+- **Videa:** MP4 z iPhonu jsou hotová, jen sem přesuň. Krátké klipy (do 30 s) jsou nejlepší pro Vercel (100 MB limit / soubor).

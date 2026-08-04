@@ -1,4 +1,5 @@
-import type { Slide as SlideType } from "../data/blocks";
+import type { MediaItem, Slide as SlideType } from "../data/blocks";
+import { MediaTile } from "./MediaTile";
 
 /**
  * Presentation slide.
@@ -74,27 +75,49 @@ function TitleSlide({ slide }: { slide: SlideType }) {
 }
 
 function TextSlide({ slide }: { slide: SlideType }) {
+  const media = slide.media ?? [];
   return (
     <Stage>
-      <div className="flex flex-col items-center text-center">
-        {slide.title && (
-          <h2
-            className="font-display text-white text-5xl md:text-6xl leading-tight uppercase"
-            style={{
-              textShadow:
-                "0 3px 0 rgba(0,0,0,0.35), 0 6px 20px rgba(0,0,0,0.5)",
-            }}
-          >
-            {slide.title}
-          </h2>
-        )}
-        {slide.body && (
-          <p className="mt-8 font-body text-white text-2xl md:text-3xl leading-relaxed max-w-4xl">
-            {slide.body}
-          </p>
-        )}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
+        <div className="text-left">
+          {slide.title && (
+            <h2
+              className="font-display text-white text-4xl md:text-5xl lg:text-6xl leading-tight uppercase"
+              style={{
+                textShadow:
+                  "0 3px 0 rgba(0,0,0,0.35), 0 6px 20px rgba(0,0,0,0.5)",
+              }}
+            >
+              {slide.title}
+            </h2>
+          )}
+          {slide.body && (
+            <p className="mt-6 font-body text-white text-xl md:text-2xl leading-relaxed">
+              {slide.body}
+            </p>
+          )}
+        </div>
+
+        <MediaGrid items={media} />
       </div>
     </Stage>
+  );
+}
+
+function MediaGrid({ items }: { items: MediaItem[] }) {
+  // Always render 4 slots — fill with real items first, rest become placeholders.
+  const slots: (MediaItem | undefined)[] = [
+    items[0],
+    items[1],
+    items[2],
+    items[3],
+  ];
+  return (
+    <div className="grid grid-cols-2 gap-3 md:gap-4">
+      {slots.map((it, i) => (
+        <MediaTile key={i} item={it} />
+      ))}
+    </div>
   );
 }
 

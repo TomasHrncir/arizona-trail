@@ -9,6 +9,15 @@ export type SlideLayout =
 
 export type Stat = { value: string; label: string };
 
+/**
+ * One image or video slot shown next to a text slide.
+ * On text slides, media appears as a 2×2 grid to the right of the copy.
+ * Provide at most 4 items — extras are ignored.
+ */
+export type MediaItem =
+  | { kind: "image"; src: string; alt?: string; caption?: string }
+  | { kind: "video"; src: string; caption?: string };
+
 export type Slide = {
   id: string;
   layout: SlideLayout;
@@ -22,6 +31,11 @@ export type Slide = {
   quote?: string;
   quoteBy?: string;
   stats?: Stat[];
+  /**
+   * Optional media grid (max 4). Text slides render 4 placeholder tiles
+   * when this is undefined, so the layout is ready to receive media.
+   */
+  media?: MediaItem[];
 };
 
 export type Block = {
