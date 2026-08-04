@@ -54,7 +54,6 @@ export const blocks: Block[] = [
         title: "V číslech",
         stats: [
           { value: "1 000 km", label: "délka" },
-          { value: "800 → 2 800 m", label: "rozpětí elevace" },
           { value: "26 dní", label: "můj čas na stezce" },
         ],
       },
