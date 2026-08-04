@@ -431,6 +431,28 @@ export const blocks: Block[] = [
         layout: "text",
         title: "Ostatní hikeři",
         body: "Potkal jsem asi 6 thru-hikerů za celou dobu, spal jsem většinu nocí sám. Nejvíc lidí bylo kolem Grand Canyonu.",
+        media: [
+          {
+            kind: "image",
+            src: "/media/lide-5/1.jpeg",
+            alt: "Parta na terase — smích",
+          },
+          {
+            kind: "image",
+            src: "/media/lide-5/2.jpeg",
+            alt: "Večeře s dědou — víno a losos",
+          },
+          {
+            kind: "image",
+            src: "/media/lide-5/3.jpeg",
+            alt: "California / Oregon border — PCT selfie",
+          },
+          {
+            kind: "image",
+            src: "/media/lide-5/4.jpeg",
+            alt: "Here Johnny — se sekerou",
+          },
+        ],
       },
     ],
   },
