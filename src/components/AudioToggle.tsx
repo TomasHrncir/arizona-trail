@@ -76,11 +76,13 @@ export function AudioToggle({
         onClick={() => setPlaying((p) => !p)}
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.94 }}
-        className="fixed bottom-4 right-4 z-50 h-12 w-12 rounded-full bg-black/40 backdrop-blur ring-1 ring-white/30 text-white flex items-center justify-center shadow-lg hover:bg-black/60 transition-colors"
+        className="fixed top-5 left-1/2 -translate-x-1/2 z-50 h-10 w-10 rounded-full bg-black/40 backdrop-blur ring-1 ring-white/30 text-white flex items-center justify-center shadow-lg hover:bg-black/60 transition-colors"
         aria-label={playing ? "Vypnout hudbu (M)" : "Zapnout hudbu (M)"}
         title={playing ? "Vypnout hudbu (M)" : "Zapnout hudbu (M)"}
       >
-        {playing ? <SpeakerOnIcon /> : <SpeakerOffIcon />}
+        <span className="[&>svg]:h-5 [&>svg]:w-5">
+          {playing ? <SpeakerOnIcon /> : <SpeakerOffIcon />}
+        </span>
         {!hasFile && (
           <span className="absolute -top-1 -right-1 rounded-full bg-az-red text-[9px] px-1 py-0.5 font-stamp">
             !

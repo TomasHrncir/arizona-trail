@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import type { MediaItem, Slide as SlideType } from "../data/blocks";
 import { MediaTile } from "./MediaTile";
 import { Lightbox, type LightboxItem } from "./Lightbox";
+import { LighterPack } from "./LighterPack";
 
 /**
  * Presentation slide.
@@ -100,7 +101,7 @@ function TextSlide({ slide }: { slide: SlideType }) {
   };
 
   // No media → center text alone, no grid, no placeholders.
-  if (!hasMedia) {
+  if (!hasMedia && !slide.lighterpack) {
     return (
       <Stage className="text-center">
         <div className="flex flex-col items-center max-w-4xl mx-auto">
@@ -177,7 +178,10 @@ function TextSlide({ slide }: { slide: SlideType }) {
           )}
         </div>
 
-        <MediaGrid items={media} onOpen={openMedia} />
+        <div className="flex flex-col gap-4">
+          <MediaGrid items={media} onOpen={openMedia} />
+          {slide.lighterpack && <LighterPack id={slide.lighterpack} />}
+        </div>
       </div>
 
       <Lightbox
