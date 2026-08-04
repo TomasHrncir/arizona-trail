@@ -74,6 +74,8 @@ export function BlockView({
   return (
     <div
       className={`relative h-full w-full overflow-hidden bg-gradient-to-b ${accentBg[block.accent]} grain`}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
     >
       <div className="absolute inset-x-0 bottom-0 h-1/3 opacity-40 pointer-events-none">
         <DesertScene className="w-full h-full" />
