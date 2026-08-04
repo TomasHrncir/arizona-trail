@@ -470,12 +470,6 @@ export const blocks: Block[] = [
           },
         ],
       },
-      {
-        id: "vybaveni-4",
-        layout: "text",
-        title: "Spaní a vaření · 0,9 kg",
-        body: "Karimatka Thermarest NeoAir (400 g). Vařič MSR Pocket Rocket (75 g), titanový hrnek Toaks 550 ml (74 g), plyn Jetboil 100 g. Vaří se jenom večer.",
-      },
     ],
   },
 
