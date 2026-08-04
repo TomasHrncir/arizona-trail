@@ -114,7 +114,7 @@ export const blocks: Block[] = [
         layout: "text",
         title: "Velké thruhiky & FKT",
         body:
-          "Trojice AT (Appalachian, 3 500 km), PCT (Pacific Crest, 4 300 km) a CDT (Continental Divide, 4 900 km) tvoří americký Triple Crown — kdo projde všechny tři, patří k thruhiking elitě. Na Novém Zélandu je pak Te Araroa (3 000 km). AZT je z nich nejmenší, zato divoký a málo lidí.\n\nFKT (Fastest Known Time) na AZT drží Nick Fowler — self-supported za 12 dní 17 hodin (2024). Unsupported Art Brody: 28 dní 3 hodiny (2021).",
+          "Trojice AT (Appalachian, 3 500 km), PCT (Pacific Crest, 4 300 km) a CDT (Continental Divide, 4 900 km) tvoří americký Triple Crown — kdo projde všechny tři, patří k thruhiking elitě. Na Novém Zélandu je pak Te Araroa (3 000 km). AZT je z nich nejmenší, zato divoký a málo lidí.\n\nFKT (Fastest Known Time) na AZT drží Nick Fowler — self-supported za 12 dní 17 hodin (2024). Supported Joe „Stringbean" McConaughy: 13 dní 3 hodiny (2021).",
         source: {
           url: "https://fastestknowntime.com/route/arizona-trail-az",
           label: "fastestknowntime.com",
