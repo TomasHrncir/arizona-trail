@@ -453,7 +453,6 @@ export const blocks: Block[] = [
         title: "Váhy",
         stats: [
           { value: "5,9 kg", label: "base weight" },
-          { value: "7,8 kg", label: "s worn věcma" },
           { value: "~13 kg", label: "s vodou a jídlem" },
         ],
       },
