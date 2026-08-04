@@ -246,6 +246,28 @@ export const blocks: Block[] = [
         layout: "text",
         title: "Water catchers & collectors",
         body: "Betonové sběrače dešťovky u stezky, cache boxy od Arizona Trail Association. Nikdy nevíš jistě, jestli je plno.",
+        media: [
+          {
+            kind: "image",
+            src: "/media/voda-4/1.jpeg",
+            alt: "Water catcher — plechový tank s Arizona Trail cedulí",
+          },
+          {
+            kind: "image",
+            src: "/media/voda-4/2.webp",
+            alt: "Kravské napajedlo v horách — voda s řasami",
+          },
+          {
+            kind: "image",
+            src: "/media/voda-4/3.webp",
+            alt: "Cache box — plastové kanystry na plotě u trailu",
+          },
+          {
+            kind: "image",
+            src: "/media/voda-4/4.PNG",
+            alt: "FarOut / water report",
+          },
+        ],
       },
       {
         id: "voda-5",
