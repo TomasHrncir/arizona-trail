@@ -45,7 +45,7 @@ export function Hub({
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.7 }}
-            className="font-display text-[#4A2418] text-5xl md:text-6xl lg:text-7xl tracking-wide uppercase leading-none"
+            className="font-display text-[#4A2418] text-6xl md:text-7xl lg:text-8xl tracking-wide uppercase leading-none"
             style={{ textShadow: "0 2px 0 rgba(255,240,215,0.55)" }}
           >
             Arizona Trail
@@ -56,7 +56,7 @@ export function Hub({
             transition={{ delay: 0.2, duration: 0.6 }}
             className="mt-2 text-lg md:text-xl italic text-[#5C3520]"
           >
-            1 300 kilometrů od Mexika k Utahu — a co jsem si odnesl
+            1 000 km od Mexika k Utahu
           </motion.p>
         </header>
 
