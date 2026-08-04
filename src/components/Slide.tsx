@@ -1,4 +1,7 @@
+import type { ComponentType, SVGProps } from "react";
 import type { Slide as SlideType } from "../data/blocks";
+
+type IconComp = ComponentType<SVGProps<SVGSVGElement>>;
 
 /**
  * Presentation slide.
@@ -8,12 +11,18 @@ import type { Slide as SlideType } from "../data/blocks";
  *  - Rye for display, Fraunces for body
  *  - Consistent max-width, centered
  */
-export function Slide({ slide }: { slide: SlideType }) {
+export function Slide({
+  slide,
+  blockIcon,
+}: {
+  slide: SlideType;
+  blockIcon?: IconComp;
+}) {
   switch (slide.layout) {
     case "title":
-      return <TitleSlide slide={slide} />;
+      return <TitleSlide slide={slide} blockIcon={blockIcon} />;
     case "text":
-      return <TextSlide slide={slide} />;
+      return <TextSlide slide={slide} blockIcon={blockIcon} />;
     case "text-image":
       return <TextImageSlide slide={slide} />;
     case "image":
@@ -23,9 +32,9 @@ export function Slide({ slide }: { slide: SlideType }) {
     case "quote":
       return <QuoteSlide slide={slide} />;
     case "stats":
-      return <StatsSlide slide={slide} />;
+      return <StatsSlide slide={slide} blockIcon={blockIcon} />;
     default:
-      return <TextSlide slide={slide} />;
+      return <TextSlide slide={slide} blockIcon={blockIcon} />;
   }
 }
 
@@ -39,21 +48,48 @@ function Stage({
   className?: string;
 }) {
   return (
-    <div className={`h-full w-full flex items-center justify-center px-16 md:px-24 py-10 ${className}`}>
+    <div
+      className={`h-full w-full flex items-center justify-center px-16 md:px-24 py-10 ${className}`}
+    >
       <div className="w-full max-w-5xl">{children}</div>
+    </div>
+  );
+}
+
+/** Big gold block-icon rendered above the title on every slide that has one. */
+function BlockBadge({ Icon }: { Icon: IconComp }) {
+  return (
+    <div
+      className="mb-6 md:mb-8 h-20 w-20 md:h-24 md:w-24 mx-auto text-az-gold"
+      style={{
+        filter:
+          "drop-shadow(0 2px 0 rgba(0,0,0,0.5)) drop-shadow(0 6px 16px rgba(0,0,0,0.35))",
+      }}
+    >
+      <Icon />
     </div>
   );
 }
 
 /* ------------------------------- variants ------------------------------ */
 
-function TitleSlide({ slide }: { slide: SlideType }) {
+function TitleSlide({
+  slide,
+  blockIcon: Icon,
+}: {
+  slide: SlideType;
+  blockIcon?: IconComp;
+}) {
   return (
     <Stage className="text-center">
       <div className="flex flex-col items-center">
+        {Icon && <BlockBadge Icon={Icon} />}
         <h1
           className="font-display text-white text-6xl md:text-8xl leading-[0.95] tracking-wide uppercase"
-          style={{ textShadow: "0 4px 0 rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.55)" }}
+          style={{
+            textShadow:
+              "0 4px 0 rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.55)",
+          }}
         >
           {slide.title}
         </h1>
@@ -68,14 +104,24 @@ function TitleSlide({ slide }: { slide: SlideType }) {
   );
 }
 
-function TextSlide({ slide }: { slide: SlideType }) {
+function TextSlide({
+  slide,
+  blockIcon: Icon,
+}: {
+  slide: SlideType;
+  blockIcon?: IconComp;
+}) {
   return (
     <Stage>
-      <div>
+      <div className="flex flex-col items-center text-center">
+        {Icon && <BlockBadge Icon={Icon} />}
         {slide.title && (
           <h2
             className="font-display text-white text-5xl md:text-6xl leading-tight uppercase"
-            style={{ textShadow: "0 3px 0 rgba(0,0,0,0.35), 0 6px 20px rgba(0,0,0,0.5)" }}
+            style={{
+              textShadow:
+                "0 3px 0 rgba(0,0,0,0.35), 0 6px 20px rgba(0,0,0,0.5)",
+            }}
           >
             {slide.title}
           </h2>
@@ -193,7 +239,9 @@ function QuoteSlide({ slide }: { slide: SlideType }) {
   return (
     <Stage className="text-center">
       <div className="flex flex-col items-center">
-        <div className="font-display text-[8rem] leading-none text-az-gold/60">"</div>
+        <div className="font-display text-[8rem] leading-none text-az-gold/60">
+          "
+        </div>
         <blockquote className="font-body italic text-white text-3xl md:text-4xl max-w-4xl leading-snug -mt-6">
           {slide.quote}
         </blockquote>
@@ -207,10 +255,17 @@ function QuoteSlide({ slide }: { slide: SlideType }) {
   );
 }
 
-function StatsSlide({ slide }: { slide: SlideType }) {
+function StatsSlide({
+  slide,
+  blockIcon: Icon,
+}: {
+  slide: SlideType;
+  blockIcon?: IconComp;
+}) {
   return (
     <Stage className="text-center">
-      <div>
+      <div className="flex flex-col items-center">
+        {Icon && <BlockBadge Icon={Icon} />}
         {slide.title && (
           <h2
             className="font-display text-white text-5xl md:text-6xl mb-12 uppercase"
@@ -219,7 +274,7 @@ function StatsSlide({ slide }: { slide: SlideType }) {
             {slide.title}
           </h2>
         )}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 w-full">
           {slide.stats?.map((s, i) => (
             <div
               key={i}

@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import type { Block } from "../data/blocks";
 import { Slide } from "./Slide";
 import { DesertScene } from "./DesertScene";
+import { BLOCK_ICONS } from "./BlockIcons";
 
 const accentBg: Record<Block["accent"], string> = {
   red: "from-az-red/90 via-az-plum to-az-night",
@@ -65,21 +66,12 @@ export function BlockView({
       <div className="relative z-20 flex items-center justify-between px-6 pt-5">
         <button
           onClick={onBack}
-          className="group flex items-center gap-2 rounded-full bg-white/10 hover:bg-white/20 px-4 py-2 text-white/90 backdrop-blur ring-1 ring-white/20 transition"
+          aria-label="Zpět na hub (Esc)"
+          title="Zpět (Esc)"
+          className="group flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 h-10 w-10 text-white/90 backdrop-blur ring-1 ring-white/20 transition"
         >
-          <span className="text-xl">←</span>
-          <span className="text-sm uppercase tracking-widest">Hub</span>
+          <span className="text-xl leading-none">←</span>
         </button>
-
-        <div className="flex items-center gap-3">
-          <span className="text-3xl">{block.icon}</span>
-          <div className="text-white">
-            <div className="font-display text-lg leading-none">
-              {block.title}
-            </div>
-            <div className="text-xs text-white/70 italic">{block.subtitle}</div>
-          </div>
-        </div>
 
         <div className="text-white/80 text-sm font-mono">
           {idx + 1} / {total}
@@ -98,7 +90,7 @@ export function BlockView({
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="h-full w-full"
           >
-            <Slide slide={slide} />
+            <Slide slide={slide} blockIcon={BLOCK_ICONS[block.id]} />
           </motion.div>
         </AnimatePresence>
       </div>

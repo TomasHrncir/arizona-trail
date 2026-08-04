@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Cow } from "./Cow";
 
 /**
  * Mid-century minimalist desert.
@@ -56,6 +57,9 @@ export function DesertScene({ className = "" }: { className?: string }) {
         <Saguaro x={980} baseY={548} scale={1.25} arms={3} phase={0.3} />
         <Saguaro x={1210} baseY={555} scale={1.0} arms={2} phase={0.7} />
         <Saguaro x={1420} baseY={555} scale={1.1} arms={3} phase={1.1} />
+
+        {/* Lone cow between saguaros — stares, tail wags, ear twitches */}
+        <Cow x={870} baseY={578} scale={1.15} flip={false} />
 
         {/* Small dark-green shrubs (foreground clumps) */}
         <Shrub x={90} baseY={600} scale={1.1} />
