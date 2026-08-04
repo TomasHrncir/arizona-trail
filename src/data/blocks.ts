@@ -315,24 +315,6 @@ export const blocks: Block[] = [
         body: "~50 % sacharidy, ~30 % tuky, ~20 % bílkoviny. Tuky nejvíc energie na váhu, sacharidy pro rychlou práci.",
       },
       {
-        id: "strava-4",
-        layout: "text",
-        title: "Snídaně",
-        body: "Ovesná kaše s ořechy a medem. 5 minut na vaření, 700 kcal.",
-      },
-      {
-        id: "strava-5",
-        layout: "text",
-        title: "Oběd a svačiny",
-        body: "Tortilly s arašídovým máslem a medem. Sušené maso. Kešu, mandle. Nutriční tyčinky.",
-      },
-      {
-        id: "strava-6",
-        layout: "text",
-        title: "Večeře",
-        body: "Dehydrované jídlo (Trail Meal / Real Turmat), těstoviny, rýže s omáčkou. 800–1 000 kcal jedním pytlíkem.",
-      },
-      {
         id: "strava-7",
         layout: "text",
         title: "Resupply",
