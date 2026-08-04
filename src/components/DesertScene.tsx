@@ -64,8 +64,6 @@ export function DesertScene({
         <Saguaro x={1210} baseY={555} scale={1.0} arms={2} phase={0.7} />
         <Saguaro x={1420} baseY={555} scale={1.1} arms={3} phase={1.1} />
 
-        {/* Lone cow between saguaros — stares, tail wags, ear twitches */}
-        <Cow x={870} baseY={578} scale={1.15} flip={false} onClick={onCowClick} />
 
         {/* Small dark-green shrubs (foreground clumps) */}
         <Shrub x={90} baseY={600} scale={1.1} />
