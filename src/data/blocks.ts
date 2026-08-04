@@ -313,6 +313,12 @@ export const blocks: Block[] = [
         layout: "text",
         title: "Makra",
         body: "~50 % sacharidy, ~30 % tuky, ~20 % bílkoviny. Tuky nejvíc energie na váhu, sacharidy pro rychlou práci.",
+        media: [
+          { kind: "image", src: "/media/strava-3/1.jpeg" },
+          { kind: "image", src: "/media/strava-3/2.jpeg" },
+          { kind: "image", src: "/media/strava-3/3.jpeg" },
+          { kind: "image", src: "/media/strava-3/4.jpeg" },
+        ],
       },
       {
         id: "strava-7",
