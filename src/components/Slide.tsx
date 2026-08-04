@@ -108,9 +108,22 @@ function TextSlide({ slide }: { slide: SlideType }) {
             </h2>
           )}
           {slide.body && (
-            <p className="mt-6 font-body text-white text-lg md:text-xl leading-relaxed">
-              {slide.body}
-            </p>
+            <div className="mt-6 font-body text-white text-lg md:text-xl leading-relaxed space-y-4">
+              {slide.body.split(/\n{2,}/).map((para, i) => (
+                <p key={i}>{para}</p>
+              ))}
+            </div>
+          )}
+          {slide.source && (
+            <a
+              href={slide.source.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex items-center gap-1.5 font-stamp text-xs uppercase tracking-widest text-az-gold/90 hover:text-az-gold underline decoration-az-gold/40 hover:decoration-az-gold underline-offset-4"
+            >
+              zdroj: {slide.source.label ?? new URL(slide.source.url).hostname}
+              <span aria-hidden>↗</span>
+            </a>
           )}
         </div>
 
