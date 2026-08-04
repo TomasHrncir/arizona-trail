@@ -222,7 +222,8 @@ export const blocks: Block[] = [
         id: "voda-2",
         layout: "text",
         title: "Arizona a voda",
-        body: "Nejsuchší stát USA. V jižní části v květnu naprší cca nic. Voda určuje, kam a jak daleko dojdeš.",
+        body:
+          "Nejsuchší stát USA. V jižní části v květnu naprší cca nic. Voda určuje, kam a jak daleko dojdeš.\n\npaní z Kearny: „No nám asi nějak v červnu dojde voda.“",
       },
       {
         id: "voda-3",
