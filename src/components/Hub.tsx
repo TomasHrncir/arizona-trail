@@ -6,6 +6,7 @@ import { CortenSign } from "./CortenSign";
 import { BLOCK_ICONS } from "./BlockIcons";
 import { Tumbleweed } from "./Tumbleweed";
 import { DustMotes } from "./DustMotes";
+import { MutedDesert } from "./MutedDesert";
 import { Lightbox, type LightboxItem } from "./Lightbox";
 
 const COW_REEL: LightboxItem = {
@@ -25,11 +26,13 @@ export function Hub({
   return (
     <div
       className="relative h-full w-full overflow-hidden grain"
-      style={{
-        background:
-          "url('/media/hub/bg.jpeg') center center / cover no-repeat, #E4B98A",
-      }}
+      style={{ background: "#7A9A94" }}
     >
+      {/* Full-viewport hand-coded muted desert backdrop */}
+      <div className="absolute inset-0 pointer-events-none">
+        <MutedDesert className="w-full h-full" />
+      </div>
+
       {/* Warm dust motes drifting up */}
       <DustMotes />
 
