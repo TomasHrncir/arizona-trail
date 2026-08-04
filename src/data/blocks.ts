@@ -164,6 +164,12 @@ export const blocks: Block[] = [
           { value: "12–14 h", label: "pohybu" },
           { value: "3 dny", label: "volna za celý trip" },
         ],
+        media: [
+          {
+            kind: "instagram",
+            src: "https://www.instagram.com/tomsarunner/reel/DYnFn9tinVv/",
+          },
+        ],
       },
       {
         id: "den-3",

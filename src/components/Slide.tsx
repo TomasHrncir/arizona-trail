@@ -316,6 +316,25 @@ function QuoteSlide({ slide }: { slide: SlideType }) {
 }
 
 function StatsSlide({ slide }: { slide: SlideType }) {
+  const media = slide.media ?? [];
+  const lightboxItems: LightboxItem[] = useMemo(
+    () =>
+      media.map((m) => {
+        if (m.kind === "image")
+          return { kind: "image" as const, src: m.src, alt: m.alt };
+        if (m.kind === "video")
+          return { kind: "video" as const, src: m.src };
+        return { kind: "instagram" as const, src: m.src };
+      }),
+    [media],
+  );
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+
+  const openMedia = (src: string) => {
+    const i = lightboxItems.findIndex((it) => it.src === src);
+    setOpenIdx(i >= 0 ? i : null);
+  };
+
   return (
     <Stage className="text-center">
       <div className="flex flex-col items-center">
@@ -356,7 +375,19 @@ function StatsSlide({ slide }: { slide: SlideType }) {
             />
           </div>
         )}
+        {media.length > 0 && (
+          <div className="mt-6 w-full max-w-4xl">
+            <MediaGrid items={media} onOpen={openMedia} />
+          </div>
+        )}
       </div>
+
+      <Lightbox
+        items={lightboxItems}
+        index={openIdx}
+        onClose={() => setOpenIdx(null)}
+        onChange={setOpenIdx}
+      />
     </Stage>
   );
 }
