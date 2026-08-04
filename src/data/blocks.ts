@@ -353,7 +353,8 @@ export const blocks: Block[] = [
         id: "zvirata-2",
         layout: "text",
         title: "Poušť není mrtvá",
-        body: "Ráno a večer žije. Odpoledne se všechno schová. Biotop se mění od pouště na jihu po hory nad Flagstaffem.",
+        body:
+          "Ráno a večer žije. Odpoledne se všechno schová. Biotop se mění od pouště na jihu po hory nad Flagstaffem.\n\nMálo hmyzu, jen u vody.\n\nNa každým kroku ale zajíček, had nebo ptáček.",
         media: [
           { kind: "video", src: "/media/zvirata-2/1.mov" },
           { kind: "video", src: "/media/zvirata-2/2.mov" },
