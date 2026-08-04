@@ -377,7 +377,7 @@ export const blocks: Block[] = [
         media: [
           {
             kind: "image",
-            src: "/media/zvirata-3/1.png",
+            src: "/media/zvirata-3/1.PNG",
             alt: "FarOut app — komentáře o stavu vody na trailu",
           },
         ],
