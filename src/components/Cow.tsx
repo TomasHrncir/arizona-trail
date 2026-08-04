@@ -1,18 +1,16 @@
 import { motion } from "framer-motion";
 
 /**
- * A stationary side-view cow (Holstein-ish) drawn with real bovine anatomy:
- * deep chest, prominent withers, sloped back, hanging belly, four separate
- * legs with knees + cloven hooves, wide floppy ears and short outward-curving
- * horns behind them.
+ * A clean side-view cow drawn as a readable silhouette.
+ * Emphasis on clarity from a distance: solid body + separated legs +
+ * elongated head with wide muzzle + short horns + hanging tail.
  *
- * Animations (looped):
- *  • Tail: mostly hangs, flicks a few times, occasional bigger swat.
- *  • Ear: rare quick twitch.
- *  • Chest: subtle slow breathing.
+ * Origin (0,0) is the ground under the middle of the belly.
+ * X grows toward the head (right when flip=false).
  *
- * Coordinates are internal to the cow (0,0 = ground under the belly).
- * `flip` mirrors the whole cow horizontally.
+ * Animations:
+ *  - Tail: lazy wag with pauses (12s loop, no metronome look)
+ *  - Ear: rare quick flick (roughly every 9s)
  */
 export function Cow({
   x,
@@ -25,160 +23,110 @@ export function Cow({
   scale?: number;
   flip?: boolean;
 }) {
-  const HIDE = "#F4EEE3"; // creamy white hide
-  const HIDE_SHADE = "#D9CFBE"; // underbelly shading
-  const SPOT = "#2A1D14"; // Holstein spots (dark brown/black)
+  const HIDE = "#F4EEE3";
+  const HIDE_SHADE = "#D6C6AF";
+  const SPOT = "#2A1D14";
   const HOOF = "#1E140E";
   const MUZZLE = "#D69A88";
-  const EAR_INNER = "#B58A7A";
   const HORN = "#C9B586";
+  const EAR_INNER = "#B58A7A";
 
   const dir = flip ? -1 : 1;
 
   return (
     <g transform={`translate(${x} ${baseY}) scale(${scale * dir}, ${scale})`}>
-      {/* -------- LEGS (drawn first, behind body) -------- */}
-      {/* Far rear leg (visually behind) */}
-      <g fill={HIDE_SHADE}>
-        <path d="M -34 -6 L -34 8 L -30 8 L -30 -6 Z" />
-        {/* knee bulge */}
-        <ellipse cx={-32} cy={-6} rx={3} ry={2} />
-        {/* upper leg */}
-        <path d="M -34 -30 L -30 -30 L -30 -6 L -34 -6 Z" />
-        {/* hoof */}
-        <path d="M -35 8 L -29 8 L -29 12 L -35 12 Z" fill={HOOF} />
-        {/* cloven split */}
-        <line
-          x1={-32}
-          y1={8}
-          x2={-32}
-          y2={12}
-          stroke={HIDE_SHADE}
-          strokeWidth={0.8}
-        />
-      </g>
+      {/* ---------- FAR (background) LEGS ---------- */}
+      <Leg x={-22} shade />
+      <Leg x={22} shade />
 
-      {/* Far front leg */}
-      <g fill={HIDE_SHADE}>
-        <path d="M 26 -30 L 30 -30 L 30 8 L 26 8 Z" />
-        <ellipse cx={28} cy={-6} rx={3} ry={2} />
-        <path d="M 25 8 L 31 8 L 31 12 L 25 12 Z" fill={HOOF} />
-        <line x1={28} y1={8} x2={28} y2={12} stroke={HIDE_SHADE} strokeWidth={0.8} />
-      </g>
-
-      {/* -------- BODY -------- */}
-      {/* Deep chest + sloped back silhouette */}
+      {/* ---------- BODY ---------- */}
+      {/* One continuous silhouette: back → rump → belly → chest */}
       <path
         d="
-          M -32 -30
-          C -34 -38, -30 -44, -22 -46
-          C -14 -48, -6 -48, 2 -46
-          C 10 -44, 18 -42, 24 -38
-          C 30 -34, 32 -30, 30 -26
-          C 30 -18, 28 -12, 26 -6
-          C 24 -2, 20 0, 14 2
-          C 6 4, -6 4, -14 2
-          C -22 0, -28 -2, -32 -8
-          C -34 -14, -34 -22, -32 -30 Z
+          M -32 -20
+          C -34 -32, -22 -38, -12 -38
+          L 14 -38
+          C 24 -38, 32 -34, 34 -26
+          L 34 -8
+          C 34 -2, 30 2, 24 2
+          L -20 2
+          C -28 2, -34 -6, -34 -14
+          Z
         "
         fill={HIDE}
       />
-
-      {/* Under-belly shading */}
+      {/* Withers hump — subtle bump on top-front of back */}
       <path
-        d="M -22 -2 C -12 2, 6 2, 20 -2 C 18 6, -14 6, -22 -2 Z"
+        d="M 14 -38 C 20 -42, 28 -42, 32 -36 C 30 -32, 22 -32, 14 -34 Z"
+        fill={HIDE}
+      />
+      {/* Belly shading */}
+      <path
+        d="M -22 0 C -8 4, 12 4, 22 0 C 20 2, -18 2, -22 0 Z"
         fill={HIDE_SHADE}
-        opacity={0.75}
       />
 
-      {/* Withers/shoulder hump */}
-      <path
-        d="M 18 -46 C 22 -50, 26 -50, 28 -44 C 26 -38, 22 -38, 18 -42 Z"
-        fill={HIDE}
-      />
-
-      {/* -------- HOLSTEIN SPOTS -------- */}
+      {/* ---------- SPOTS (Holstein) ---------- */}
       <g fill={SPOT}>
-        <path d="M -20 -40 C -14 -44, -6 -44, -2 -40 C -6 -34, -14 -34, -20 -40 Z" />
-        <path d="M 6 -32 C 12 -34, 18 -32, 20 -28 C 16 -24, 8 -26, 6 -32 Z" />
-        <path d="M -26 -20 C -20 -22, -14 -20, -14 -14 C -20 -12, -28 -14, -26 -20 Z" />
+        <path d="M -22 -30 C -14 -34, -4 -34, -2 -28 C -6 -22, -18 -22, -22 -30 Z" />
+        <path d="M 6 -22 C 14 -24, 22 -22, 22 -16 C 18 -12, 8 -14, 6 -22 Z" />
+        <path d="M -26 -12 C -20 -14, -14 -12, -14 -6 C -20 -4, -28 -6, -26 -12 Z" />
       </g>
 
-      {/* -------- UDDER + TEATS -------- */}
-      <ellipse cx={-4} cy={5} rx={10} ry={5} fill={HIDE} />
-      <ellipse cx={-4} cy={5} rx={10} ry={5} fill={HIDE_SHADE} opacity={0.5} />
-      <circle cx={-8} cy={8} r={1.2} fill={MUZZLE} />
-      <circle cx={0} cy={8} r={1.2} fill={MUZZLE} />
+      {/* ---------- UDDER ---------- */}
+      <ellipse cx={-4} cy={4} rx={8} ry={3.5} fill={HIDE} />
+      <ellipse cx={-4} cy={4} rx={8} ry={3.5} fill={HIDE_SHADE} opacity={0.6} />
+      <circle cx={-8} cy={6.5} r={1} fill={MUZZLE} />
+      <circle cx={-2} cy={6.5} r={1} fill={MUZZLE} />
 
-      {/* -------- NEAR LEGS (front over body) -------- */}
-      {/* Near rear leg */}
-      <g fill={HIDE}>
-        <rect x={-28} y={-30} width={5} height={38} />
-        <ellipse cx={-25.5} cy={-6} rx={3.3} ry={2.4} />
-        <path d="M -29 8 L -22 8 L -22 12 L -29 12 Z" fill={HOOF} />
-        <line x1={-25.5} y1={8} x2={-25.5} y2={12} stroke={HIDE_SHADE} strokeWidth={0.8} />
-      </g>
+      {/* ---------- NEAR (front) LEGS ---------- */}
+      <Leg x={-18} />
+      <Leg x={26} />
 
-      {/* Near front leg */}
-      <g fill={HIDE}>
-        <rect x={19} y={-30} width={5} height={38} />
-        <ellipse cx={21.5} cy={-6} rx={3.3} ry={2.4} />
-        <path d="M 18 8 L 25 8 L 25 12 L 18 12 Z" fill={HOOF} />
-        <line x1={21.5} y1={8} x2={21.5} y2={12} stroke={HIDE_SHADE} strokeWidth={0.8} />
-      </g>
-
-      {/* -------- NECK + HEAD -------- */}
-      {/* Neck */}
+      {/* ---------- NECK + HEAD ---------- */}
+      {/* Neck rises from front-top of body toward head */}
       <path
-        d="M 22 -44 C 30 -46, 38 -46, 44 -44 L 46 -30 C 40 -28, 32 -28, 26 -30 Z"
+        d="M 24 -34 C 30 -38, 38 -38, 44 -34 L 46 -22 C 40 -20, 30 -22, 24 -26 Z"
         fill={HIDE}
       />
-
-      {/* Head — elongated with prominent muzzle */}
+      {/* Head — box with tapered muzzle */}
       <path
         d="
-          M 40 -46
-          C 48 -50, 58 -48, 62 -42
-          C 64 -36, 62 -30, 58 -26
-          C 54 -22, 46 -22, 42 -26
-          C 40 -32, 38 -40, 40 -46 Z
+          M 40 -36
+          C 48 -40, 58 -40, 62 -34
+          L 62 -22
+          C 60 -18, 50 -16, 44 -18
+          L 40 -22
+          Z
         "
         fill={HIDE}
       />
-
-      {/* Forehead spot */}
-      <path
-        d="M 46 -44 C 50 -46, 54 -45, 55 -42 C 53 -39, 48 -40, 46 -44 Z"
-        fill={SPOT}
-      />
-
-      {/* Muzzle (wide pink nose area) */}
-      <ellipse cx={58} cy={-28} rx={6.5} ry={5} fill={MUZZLE} />
+      {/* Muzzle (wider at the very tip) */}
+      <ellipse cx={60} cy={-22} rx={5} ry={4} fill={MUZZLE} />
       {/* Nostrils */}
-      <ellipse cx={60} cy={-30} rx={1} ry={1.4} fill={SPOT} />
-      <ellipse cx={60} cy={-25} rx={1} ry={1.4} fill={SPOT} />
+      <ellipse cx={61} cy={-24} rx={0.9} ry={1.2} fill={SPOT} />
+      <ellipse cx={61} cy={-20} rx={0.9} ry={1.2} fill={SPOT} />
       {/* Mouth line */}
       <path
-        d="M 55 -24 Q 58 -22 62 -24"
+        d="M 56 -18 Q 60 -16 63 -18"
         stroke={SPOT}
-        strokeWidth={0.7}
+        strokeWidth={0.6}
         fill="none"
+        strokeLinecap="round"
       />
-
+      {/* Forehead patch */}
+      <path
+        d="M 48 -36 C 52 -38, 56 -37, 57 -34 C 54 -32, 50 -33, 48 -36 Z"
+        fill={SPOT}
+      />
       {/* Eye */}
-      <ellipse cx={50} cy={-38} rx={1.8} ry={2.2} fill={SPOT} />
-      <circle cx={50.5} cy={-38.8} r={0.6} fill="white" />
-      {/* Eyelashes hint */}
-      <path
-        d="M 48 -40 L 47 -41 M 50 -40.5 L 50 -41.5 M 52 -40 L 53 -41"
-        stroke={SPOT}
-        strokeWidth={0.5}
-      />
+      <ellipse cx={52} cy={-30} rx={1.4} ry={1.7} fill={SPOT} />
+      <circle cx={52.4} cy={-30.6} r={0.5} fill="white" />
 
-      {/* -------- EARS -------- */}
-      {/* Far ear (behind head) */}
+      {/* ---------- EARS ---------- */}
+      {/* Far ear (offset behind) */}
       <path
-        d="M 42 -50 C 40 -56, 46 -58, 48 -52 C 48 -50, 46 -48, 42 -50 Z"
+        d="M 42 -40 C 40 -46, 46 -48, 48 -42 Z"
         fill={HIDE_SHADE}
         stroke={SPOT}
         strokeWidth={0.5}
@@ -186,8 +134,8 @@ export function Cow({
 
       {/* Near ear — twitches occasionally */}
       <motion.g
-        style={{ transformOrigin: `48px -46px` }}
-        animate={{ rotate: [0, 0, 0, 0, 0, -22, 3, -8, 0, 0, 0, 0] }}
+        style={{ transformOrigin: `48px -38px` }}
+        animate={{ rotate: [0, 0, 0, 0, 0, -22, 4, -10, 0, 0, 0, 0] }}
         transition={{
           duration: 9,
           repeat: Infinity,
@@ -196,42 +144,41 @@ export function Cow({
         }}
       >
         <path
-          d="M 44 -46 C 46 -56, 56 -54, 56 -47 C 54 -43, 47 -43, 44 -46 Z"
+          d="M 44 -38 C 46 -46, 56 -46, 55 -38 C 52 -35, 47 -35, 44 -38 Z"
           fill={HIDE}
           stroke={SPOT}
-          strokeWidth={0.6}
+          strokeWidth={0.5}
         />
         <path
-          d="M 46 -47 C 48 -52, 54 -51, 54 -47 C 52 -45, 48 -45, 46 -47 Z"
+          d="M 46 -39 C 48 -43, 53 -43, 53 -39 C 51 -37, 48 -37, 46 -39 Z"
           fill={EAR_INNER}
         />
       </motion.g>
 
-      {/* -------- HORNS (short, curved outward) -------- */}
+      {/* ---------- HORNS (short, outward-curving) ---------- */}
       <path
-        d="M 44 -49 C 42 -54, 39 -55, 38 -52 C 39 -51, 42 -50, 44 -49 Z"
+        d="M 45 -40 Q 41 -44, 40 -41 Q 42 -40, 45 -40 Z"
         fill={HORN}
         stroke={SPOT}
         strokeWidth={0.5}
       />
       <path
-        d="M 52 -50 C 54 -55, 57 -55, 58 -52 C 56 -51, 54 -50, 52 -50 Z"
+        d="M 52 -40 Q 56 -44, 57 -41 Q 55 -40, 52 -40 Z"
         fill={HORN}
         stroke={SPOT}
         strokeWidth={0.5}
       />
 
-      {/* -------- TAIL -------- */}
-      {/* Tail with realistic lazy wag: mostly hangs, occasional flick + swat */}
+      {/* ---------- TAIL ---------- */}
       <motion.g
-        style={{ transformOrigin: `-32px -34px` }}
+        style={{ transformOrigin: `-32px -28px` }}
         animate={{
           rotate: [
-            0, 0, 0, 0, 0,           // hangs still
-            -6, 4, -3, 0, 0,          // small flick
-            0, 0, 0, 0,               // pause
-            -14, 8, -10, 3, 0, 0,     // bigger swat
-            0, 0, 0, 0, 0,            // rest
+            0, 0, 0, 0, 0, // idle
+            -6, 5, -3, 0, 0, // small flick
+            0, 0, 0, 0, // pause
+            -14, 8, -10, 4, 0, 0, // bigger swat
+            0, 0, 0, 0, 0, // rest
           ],
         }}
         transition={{
@@ -240,42 +187,44 @@ export function Cow({
           ease: "easeInOut",
         }}
       >
-        {/* Tail base attaches near the rump */}
+        {/* Long thin tail hanging from the rump */}
         <path
-          d="M -30 -34 C -36 -30, -42 -20, -44 -6"
+          d="M -32 -28 C -38 -20, -42 -10, -44 2"
           stroke={HIDE}
-          strokeWidth={3.2}
+          strokeWidth={2.5}
           fill="none"
           strokeLinecap="round"
         />
-        {/* Bushy tail tuft at end */}
+        {/* Bushy tuft at end */}
         <path
-          d="M -44 -6 C -47 -3, -49 2, -47 6 C -45 4, -43 2, -42 -2 Z"
+          d="M -44 2 C -47 5, -48 10, -46 12 C -44 10, -42 6, -42 2 Z"
           fill={SPOT}
         />
-        <path
-          d="M -46 -2 L -49 4 M -44 0 L -46 6 M -42 -2 L -43 4"
-          stroke={SPOT}
-          strokeWidth={0.9}
-          strokeLinecap="round"
-        />
       </motion.g>
-
-      {/* -------- BREATHING (subtle chest expansion) -------- */}
-      <motion.ellipse
-        cx={16}
-        cy={-24}
-        rx={10}
-        ry={6}
-        fill={HIDE}
-        opacity={0}
-        animate={{ opacity: [0, 0.08, 0] }}
-        transition={{
-          duration: 3.6,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
     </g>
   );
+
+  /* ---- helper: one leg (upper part + hoof + cloven split) ---- */
+  function Leg({ x: lx, shade = false }: { x: number; shade?: boolean }) {
+    const legFill = shade ? HIDE_SHADE : HIDE;
+    return (
+      <g>
+        {/* Upper leg */}
+        <rect x={lx - 2.4} y={-6} width={4.8} height={16} fill={legFill} />
+        {/* Knee */}
+        <ellipse cx={lx} cy={-6} rx={2.8} ry={1.8} fill={legFill} />
+        {/* Hoof */}
+        <rect x={lx - 3} y={10} width={6} height={4} fill={HOOF} rx={0.5} />
+        {/* Cloven split */}
+        <line
+          x1={lx}
+          y1={10}
+          x2={lx}
+          y2={14}
+          stroke={legFill}
+          strokeWidth={0.7}
+        />
+      </g>
+    );
+  }
 }
