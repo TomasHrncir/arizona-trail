@@ -451,6 +451,12 @@ export const blocks: Block[] = [
         layout: "text",
         title: "Došla mi voda",
         body: "[Detail doplním před přednáškou — kde, kolik chybělo, jak jsem to řešil.]",
+        media: [
+          {
+            kind: "instagram",
+            src: "https://www.instagram.com/p/DYQobXVi4Ao/",
+          },
+        ],
       },
       {
         id: "prihody-3",
